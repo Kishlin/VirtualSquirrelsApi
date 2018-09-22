@@ -7,7 +7,7 @@ Virtual Squirrels Api
 [![licence](https://img.shields.io/packagist/l/doctrine/orm.svg)](https://spdx.org/licenses/MIT)
 [![symfony](https://img.shields.io/badge/symfony-v3.4-yellow.svg)](https://symfony.com/)
 [![doctrine](https://img.shields.io/badge/doctrine-v2.5.14-green.svg)](https://www.doctrine.fr/)
-[![phpunit](https://img.shields.io/badge/phpunit-v2.5.14-magenta.svg)](https://phpunit.de/)
+[![phpunit](https://img.shields.io/badge/phpunit-v7.0.0-magenta.svg)](https://phpunit.de/)
 
 
 This project is the api for the guild website of [Oh My Gosh Virtual Squirrels](http://virtualsquirrels.fr/).
@@ -41,6 +41,14 @@ composer install
 
 ````bash
 php bin/console server:run
+````
+
+
+Testing
+-------
+
+````bash
+vendor/bin/phpunit -c path/to/phpunit.xml src/
 ````
 
 

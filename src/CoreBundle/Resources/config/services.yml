@@ -1,0 +1,7 @@
+services:
+  CoreBundle\Listener\ExceptionListener:
+    class: 'CoreBundle\Listener\ExceptionListener'
+    arguments:
+      $logger: '@logger'
+    tags:
+    - { name: kernel.event_listener, event: kernel.exception }

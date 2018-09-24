@@ -1,0 +1,9 @@
+core_auth:
+  path:     /auth
+  defaults: { _controller: CoreBundle:Core:auth }
+  methods:  [POST]
+
+core_whoami:
+  path:     /whoami
+  defaults: { _controller: CoreBundle:Core:whoAmI }
+  methods:  [GET]

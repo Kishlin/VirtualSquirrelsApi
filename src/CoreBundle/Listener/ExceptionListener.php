@@ -39,6 +39,9 @@ class ExceptionListener
         $exception = $event->getException();
 
         $this->logger->error(self::MESSAGE, array(
+            'class'   => get_class($exception),
+            'file'    => $exception->getFile(),
+            'line'    => $exception->getLine(),
             'message' => $exception->getMessage(),
             'trace'   => $exception->getTraceAsString()
         ));

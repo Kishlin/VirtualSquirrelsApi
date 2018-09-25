@@ -5,7 +5,7 @@
  * Time: 6:46 PM
  */
 
-namespace CoreBundle\Listener;
+namespace CoreBundle\EventListener;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,12 +23,17 @@ class ExceptionListener
     /** @var LoggerInterface */
     protected $logger;
 
+    /** @var string */
+    protected $env;
+
     /**
      * @param LoggerInterface $logger
+     * @param string          $env
      */
-    public function __construct(LoggerInterface $logger)
+    public function __construct(LoggerInterface $logger, string $env)
     {
         $this->logger = $logger;
+        $this->env    = $env;
     }
 
     /**
@@ -37,6 +42,7 @@ class ExceptionListener
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
         $exception = $event->getException();
+        $array = array('message' => self::MESSAGE);
 
         $this->logger->error(self::MESSAGE, array(
             'class'   => get_class($exception),
@@ -46,7 +52,14 @@ class ExceptionListener
             'trace'   => $exception->getTraceAsString()
         ));
 
-        $event->setResponse(new JsonResponse(array('message' => self::MESSAGE), 500));
+        if ($this->env !== 'prod') {
+            $array['exception']['message'] = $exception->getMessage();
+            $array['exception']['file']    = $exception->getFile();
+            $array['exception']['line']    = $exception->getLine();
+            $array['exception']['trace']   = $exception->getTraceAsString();
+        }
+
+        $event->setResponse(new JsonResponse($array, 500));
     }
 
 }

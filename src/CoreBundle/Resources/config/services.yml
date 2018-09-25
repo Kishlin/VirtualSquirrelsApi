@@ -1,16 +1,9 @@
 services:
-  CoreBundle\Listener\ExceptionListener:
-    class: 'CoreBundle\Listener\ExceptionListener'
+  CoreBundle\EventListener\ExceptionListener:
+    class: 'CoreBundle\EventListener\ExceptionListener'
     arguments:
       $logger: '@logger'
+      $env: '%kernel.environment%'
     tags:
     - { name: kernel.event_listener, event: kernel.exception }
-
-  CoreBundle\Listener\AuthenticationListener:
-    class: 'CoreBundle\Listener\AuthenticationListener'
-    arguments:
-      $loginManager: '@fos_user.security.login_manager'
-      $firewallName: '%fos_user.firewall_name%'
-    tags:
-    - { name: kernel.event_listener, event: kernel.event_subscriber }
 

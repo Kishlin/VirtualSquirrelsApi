@@ -6,9 +6,11 @@ services:
 
     CoreBundle\:
         resource: '../../src/CoreBundle/*'
-        # you can exclude directories or files
-        # but if a service is unused, it's removed anyway
         exclude: '../../src/CoreBundle/{Entity,Repository,Tests}'
+
+    UserBundle\:
+        resource: '../../src/UserBundle/*'
+        exclude: '../../src/UserBundle/{Entity,Repository,Tests}'
 
     CoreBundle\Controller\:
         resource: '../../src/CoreBundle/Controller'

@@ -9,11 +9,15 @@ namespace UserBundle\Entity;
 
 
 use FOS\UserBundle\Model\User as BaseUser;
+use JMS\Serializer\Annotation as JMS;
 use Doctrine\ORM\Mapping as ORM;
+use UserBundle\UserRoles;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="vs_user")
+ *
+ * @JMS\ExclusionPolicy("all")
  */
 class User extends BaseUser
 {
@@ -22,12 +26,29 @@ class User extends BaseUser
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @JMS\Expose
+     * @JMS\Groups({"default"})
      */
     protected $id;
 
     public function __construct()
     {
         parent::__construct();
+    }
+
+
+    /**
+     * @return array
+     */
+    public static function getPossibleRoles(): array
+    {
+        return array(
+            UserRoles::ROLE_TRIAL,
+            UserRoles::ROLE_MEMBER,
+            UserRoles::ROLE_OFFICER,
+            UserRoles::ROLE_ADMIN
+        );
     }
 
 }

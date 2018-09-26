@@ -11,7 +11,7 @@ namespace CoreBundle\Controller;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\FOSRestController;
-use Symfony\Component\HttpFoundation\Response;
+use JMS\Serializer\SerializerInterface;
 
 /**
  * @package CoreBundle\Controller
@@ -20,22 +20,30 @@ use Symfony\Component\HttpFoundation\Response;
 class LoadingController extends FOSRestController
 {
 
-    /**
-     * @Get("/loading")
-     * @View()
-     *
-     * @return Response
-     */
-    public function loadingAction(): Response
-    {
-        $data = array('user' => $this->getUser() ?? array());
+    /** @var SerializerInterface */
+    protected $serializer;
 
-        $data['userList'] = $this->getDoctrine()->getRepository('UserBundle:User')->findBy(array(), array('id' => 'asc'));
+    /**
+     * @param SerializerInterface $serializer
+     */
+    public function __construct(SerializerInterface $serializer)
+    {
+        $this->serializer = $serializer;
+    }
+
+
+    /**
+     * @Get("/loading", name="core_loading")
+     * @View()
+     */
+    public function loadingAction()
+    {
+        $data['user'] = $this->getUser() ?? array();
+        $data['userList'] =  $this->getDoctrine()->getRepository('UserBundle:User')->findBy(array(), array('id' => 'asc'));
 
         $view = $this->view($data, 200);
 
-        return $this->handleView($view);
-
+        return $view;
     }
 
 }

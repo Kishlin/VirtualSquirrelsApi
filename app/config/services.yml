@@ -1,8 +1,8 @@
 services:
     _defaults:
+        public: false
         autowire: true
         autoconfigure: true
-        public: false
 
     CoreBundle\:
         resource: '../../src/CoreBundle/*'
@@ -14,5 +14,5 @@ services:
 
     CoreBundle\Controller\:
         resource: '../../src/CoreBundle/Controller'
-        public: true
         tags: ['controller.service_arguments']
+        public: true

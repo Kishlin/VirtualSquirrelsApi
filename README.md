@@ -37,6 +37,10 @@ cd VirtualSquirrelsApi
 composer install
 ````
 
+* Create your `app/config/parameters.yml` locally.
+
+Use `app/config/parameters.yml.dist` as base template.
+
 * Database
 
 ````bash

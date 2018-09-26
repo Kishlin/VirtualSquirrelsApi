@@ -4,3 +4,7 @@ user:
 
 core:
     resource: "@CoreBundle/Resources/config/routing.yml"
+
+users:
+    type:     rest
+    resource: CoreBundle\Controller\LoadingController

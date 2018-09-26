@@ -7,13 +7,15 @@
 
 namespace CoreBundle\Controller;
 
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
- * Class CoreController
+ * @package CoreBundle\Controller
+ * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
-class CoreController extends Controller
+class AuthController extends Controller
 {
 
     /**
@@ -21,10 +23,9 @@ class CoreController extends Controller
      */
     public function whoAmIAction(): JsonResponse
     {
-        if (null === ($user = $this->getUser())) throw new \RuntimeException('User is not authenticated.');
-
-        return new JsonResponse(array('user' => $user->getEmail()));
+        return new JsonResponse(
+            (null === ($user = $this->getUser())) ? array('message' => 'User is not logged in.') : array('user' => $user->getEmail())
+        );
     }
-
 
 }

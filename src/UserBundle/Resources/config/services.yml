@@ -1,0 +1,25 @@
+services:
+  UserBundle\Handler\Security\AuthenticationFailure:
+    class: 'UserBundle\Handler\Security\AuthenticationFailure'
+    arguments:
+      $exceptionResponseBuilder: '@CoreBundle\Services\HttpFoundation\ExceptionResponseBuilderInterface'
+
+  UserBundle\Handler\Security\AuthenticationSuccess:
+    class: 'UserBundle\Handler\Security\AuthenticationSuccess'
+    arguments:
+      $logger: '@logger'
+    tags:
+      - { name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin }
+
+  UserBundle\Handler\Security\LogoutSuccess:
+    class: 'UserBundle\Handler\Security\LogoutSuccess'
+
+
+  security.custom.authentication.failure:
+    alias: 'UserBundle\Handler\Security\AuthenticationFailure'
+
+  security.custom.authentication.success:
+    alias: 'UserBundle\Handler\Security\AuthenticationSuccess'
+
+  security.custom.authentication.logout:
+    alias: 'UserBundle\Handler\Security\LogoutSuccess'

@@ -23,7 +23,13 @@ security:
             pattern: ^/
             form_login:
                 provider: fos_userbundle
-            logout:    true
+                check_path: fos_user_security_check
+                failure_handler: security.custom.authentication.failure
+                success_handler: security.custom.authentication.success
+            logout:
+                path:   /security/logout
+                target: /
+                success_handler: security.custom.authentication.logout
             anonymous: true
             remember_me:
                 secret:   "%secret%"
@@ -31,7 +37,6 @@ security:
                 path:     /
 
     access_control:
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/unsafe, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^security/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^security/registration/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+#        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -17,9 +17,9 @@ TO DO
 -----
 
 #### Road map to first release:
-- User account.
-- Applications with votes and discussion feed for members.
-- Calendar events with subscriptions, and admin/officer edit.
+- User: accounts management.
+- Events: calendar events with subscriptions, and admin/officer edit.
+- Applications: votes and discussion feed for members, with and without the applicant.
 
 Installation & Usage
 --------------------

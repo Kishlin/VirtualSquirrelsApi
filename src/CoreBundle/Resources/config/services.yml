@@ -2,8 +2,12 @@ services:
   CoreBundle\EventListener\ExceptionListener:
     class: 'CoreBundle\EventListener\ExceptionListener'
     arguments:
-      $logger: '@logger'
-      $env: '%kernel.environment%'
+      $exceptionResponseBuilder: '@CoreBundle\Services\HttpFoundation\ExceptionResponseBuilderInterface'
     tags:
     - { name: kernel.event_listener, event: kernel.exception }
 
+  CoreBundle\Services\HttpFoundation\ExceptionResponseBuilderInterface:
+    class: 'CoreBundle\Services\HttpFoundation\ExceptionResponseBuilder'
+    arguments:
+      $logger: '@logger'
+      $env: '%kernel.environment%'

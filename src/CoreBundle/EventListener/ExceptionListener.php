@@ -7,34 +7,28 @@
 
 namespace CoreBundle\EventListener;
 
-use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
+
+use CoreBundle\Services\HttpFoundation\ExceptionResponseBuilderInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 
-
 /**
- * Class ExceptionListener
+ * @package CoreBundle\EventListener
+ * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
 class ExceptionListener
 {
 
-    const MESSAGE = 'An exception occurred in kernel.';
-
-    /** @var LoggerInterface */
-    protected $logger;
-
-    /** @var string */
-    protected $env;
+    /** @var ExceptionResponseBuilderInterface */
+    protected $exceptionResponseBuilder;
 
     /**
-     * @param LoggerInterface $logger
-     * @param string          $env
+     * @param ExceptionResponseBuilderInterface $exceptionResponseBuilder
      */
-    public function __construct(LoggerInterface $logger, string $env)
+    public function __construct(ExceptionResponseBuilderInterface $exceptionResponseBuilder)
     {
-        $this->logger = $logger;
-        $this->env    = $env;
+        $this->exceptionResponseBuilder = $exceptionResponseBuilder;
     }
+
 
     /**
      * @param GetResponseForExceptionEvent $event
@@ -42,24 +36,9 @@ class ExceptionListener
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
         $exception = $event->getException();
-        $array = array('message' => self::MESSAGE);
+        $response  = $this->exceptionResponseBuilder->build($exception);
 
-        $this->logger->error(self::MESSAGE, array(
-            'class'   => get_class($exception),
-            'file'    => $exception->getFile(),
-            'line'    => $exception->getLine(),
-            'message' => $exception->getMessage(),
-            'trace'   => $exception->getTraceAsString()
-        ));
-
-        if ($this->env !== 'prod') {
-            $array['exception']['message'] = $exception->getMessage();
-            $array['exception']['file']    = $exception->getFile();
-            $array['exception']['line']    = $exception->getLine();
-            $array['exception']['trace']   = $exception->getTraceAsString();
-        }
-
-        $event->setResponse(new JsonResponse($array, 500));
+        $event->setResponse($response);
     }
 
 }

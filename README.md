@@ -37,6 +37,13 @@ cd VirtualSquirrelsApi
 composer install
 ````
 
+* Database
+
+````bash
+php bin/console doctrine:database:create
+php bin/console doctrine:schema:update --force-sql
+````
+
 * Start development server.
 
 ````bash

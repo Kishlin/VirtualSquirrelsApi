@@ -5,20 +5,18 @@
  * Time: 7:23 PM
  */
 
-namespace CoreBundle\EventSubscriber\Registration;
+namespace UserBundle\EventSubscriber\Registration;
+
 
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\FOSUserEvents;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
- * Class InitializeListener
- * @package   CoreBundle\EventSubscriber\Registration
- * @author    Pierre-Louis Legrand <hello@pierrelouislegrand.fr>
- * @copyright 2017 Pierre-Louis Legrand
- * @link      http://www.pierrelouislegrand.fr
+ * @package UserBundle\EventSubscriber\Registration
+ * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
 class InitializeListener implements EventSubscriberInterface
 {
@@ -48,15 +46,25 @@ class InitializeListener implements EventSubscriberInterface
      */
     public function onInitialize(GetResponseUserEvent $event)
     {
+        $this->logger->info($event->getRequest()->request->has('fos_user_registration_form') ? 'true' : 'false');
+
         if ($event->getRequest()->request->has('fos_user_registration_form'))
             return;
 
-        $this->logger->warning(
-            'Throwing exception after receiving a blank request.',
-            array('method' => 'onInitialize', 'class' => self::class)
+        if (null !== ($form = $event->getRequest()->request->get('fos_user_registration_form')))
+            return;
+
+        $data = array(
+            'message' => 'Some required parameters are missing in request.',
+            'requirements' => array(
+                'fos_user_registration_form[email]',
+                'fos_user_registration_form[username]',
+                'fos_user_registration_form[plainPassword][first]',
+                'fos_user_registration_form[plainPassword][second]'
+            )
         );
 
-        throw new BadRequestHttpException('Missing fos_user_registration_form values.');
+        $event->setResponse(new JsonResponse($data));
     }
 
 }

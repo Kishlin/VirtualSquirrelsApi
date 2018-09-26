@@ -5,7 +5,8 @@
  * Time: 5:18 PM
  */
 
-namespace CoreBundle\EventSubscriber\Registration;
+namespace UserBundle\EventSubscriber\Registration;
+
 
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\FOSUserEvents;
@@ -20,14 +21,13 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\ConstraintViolation;
 
 /**
- * @package   CoreBundle\EventSubscriber\Registration
- * @author    Pierre-Louis Legrand <hello@pierrelouislegrand.fr>
- * @copyright 2017 Pierre-Louis Legrand
- * @link      http://www.pierrelouislegrand.fr
+ * @package UserBundle\EventSubscriber\Registration
+ * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
 class FailureListener implements EventSubscriberInterface
 {
 
+    /** @var array */
     const FIELDS = array(
         'data.username'           => 'username',
         'data.email'              => 'email',
@@ -35,6 +35,7 @@ class FailureListener implements EventSubscriberInterface
         'children[plainPassword]' => 'password'
     );
 
+    /** @var array */
     const ERRORS = array(
         UniqueEntity::class => 'taken',
         NotBlank::class     => 'blank',
@@ -87,4 +88,5 @@ class FailureListener implements EventSubscriberInterface
 
         $event->setResponse(new JsonResponse($data, 400));
     }
+
 }

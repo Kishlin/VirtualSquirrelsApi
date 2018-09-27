@@ -24,6 +24,9 @@ use UserBundle\UserRoles;
 class User extends BaseUser
 {
 
+    /** @var string */
+    const REPOSITORY = 'UserBundle:User';
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")

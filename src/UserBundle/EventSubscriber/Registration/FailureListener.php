@@ -27,6 +27,9 @@ use Symfony\Component\Validator\ConstraintViolation;
 class FailureListener implements EventSubscriberInterface
 {
 
+    /** @var string */
+    const ERROR_MESSAGE = 'Form failure.';
+
     /** @var array */
     const FIELDS = array(
         'data.username'           => 'username',
@@ -59,7 +62,7 @@ class FailureListener implements EventSubscriberInterface
     /**
      * {@inheritDoc}
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return array(FOSUserEvents::REGISTRATION_FAILURE => 'onFailure');
     }
@@ -67,9 +70,9 @@ class FailureListener implements EventSubscriberInterface
     /**
      * @param FormEvent $event
      */
-    public function onFailure(FormEvent $event)
+    public function onFailure(FormEvent $event): void
     {
-        $data = array('message' => 'Form failure.');
+        $data = array('message' => self::ERROR_MESSAGE);
         $errors = $event->getForm()->getErrors(true);
 
         foreach ($errors as $key => $formError) { /** @var FormError $formError */
@@ -79,7 +82,7 @@ class FailureListener implements EventSubscriberInterface
             $type = self::ERRORS[get_class($cause->getConstraint())];
 
             $this->logger->debug(
-                'An error was found.',
+                self::ERROR_MESSAGE,
                 array('errorKey' => $key, 'errorType' => $type, 'method' => 'onFailure', 'class' => self::class)
             );
 

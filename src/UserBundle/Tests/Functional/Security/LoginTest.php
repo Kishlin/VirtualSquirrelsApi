@@ -64,13 +64,10 @@ class LoginTest extends WebTestCase
         $client = $this->makeClient();
         $client->request('POST', '/security/login', $parameters);
 
-        $this->assertStatusCode(200, $client);
+        $this->assertStatusCode(303, $client);
         $this->assertJsonResponse($client);
 
-        $this->assertCount(1, $response = json_decode($client->getResponse()->getContent(), true));
-        $this->assertArrayHasKey('email', $response);
-
-        $this->assertEquals('example@gmail.com', $response['email']);
+        $this->assertEquals('/loading', $client->getResponse()->headers->get('location'));
     }
 
 }

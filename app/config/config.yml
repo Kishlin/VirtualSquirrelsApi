@@ -114,3 +114,6 @@ jms_serializer:
       FOSUserBundle:
         namespace_prefix: "FOS\\UserBundle"
         path: "@UserBundle/Resources/config/serializer/fos"
+
+user:
+  login_redirect: 'loadingcore_loading'

@@ -22,7 +22,7 @@ class WebTestCase extends BaseClass
      * @param Client $client
      * @throws \Exception
      */
-    public function assertJsonResponse(Client $client)
+    public function assertJsonResponse(Client $client): void
     {
         $this->assertEquals('application/json', $client->getResponse()->headers->get('content-type'));
     }

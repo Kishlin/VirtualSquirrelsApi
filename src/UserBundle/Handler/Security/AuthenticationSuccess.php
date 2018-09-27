@@ -38,7 +38,7 @@ class AuthenticationSuccess implements AuthenticationSuccessHandlerInterface
     /**
      * @param InteractiveLoginEvent $event
      */
-    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
+    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event): void
     {
         $token = $event->getAuthenticationToken();
         $request = $event->getRequest();

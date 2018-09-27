@@ -15,7 +15,7 @@ use UserBundle\Tests\Functional\Util\WebTestCase;
  * @package UserBundle\Tests\Security\Registration
  * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
-class RegisterTest extends WebTestCase
+class RegistrationTest extends WebTestCase
 {
 
     /**

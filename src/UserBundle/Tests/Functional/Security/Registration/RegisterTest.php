@@ -8,8 +8,8 @@
 namespace UserBundle\Tests\Security\Registration;
 
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use UserBundle\EventSubscriber\Registration\InitializeListener;
+use UserBundle\Tests\Functional\Util\WebTestCase;
 
 /**
  * @package UserBundle\Tests\Security\Registration
@@ -25,14 +25,13 @@ class RegisterTest extends WebTestCase
      */
     public function testThrowsException(array $parameters)
     {
-        $client = static::createClient();
-
+        $client = $this->makeClient();
         $client->request('POST', '/security/registration/register', $parameters);
 
         $response = $client->getResponse();
 
-        $this->assertEquals('application/json', $response->headers->get('content-type'));
-        $this->assertEquals(400, $response->getStatusCode());
+        $this->assertStatusCode(400, $client);
+        $this->assertJsonResponse($client);
 
         $content = json_decode($response->getContent(), true);
         $this->assertArrayHasKey('requirements', $content);

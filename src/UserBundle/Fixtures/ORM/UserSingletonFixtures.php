@@ -39,9 +39,10 @@ class UserSingletonFixtures extends Fixture
     {
         $user = new User();
 
+        $user->setEnabled(true);
         $user->setUsername('user');
-        $user->setEmail('example@gmail.com');
         $user->setPlainPassword('changeme');
+        $user->setEmail('example@gmail.com');
 
         $this->passwordUpdater->hashPassword($user);
 

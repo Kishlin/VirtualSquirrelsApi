@@ -17,19 +17,11 @@ use UserBundle\Entity\User;
  * @package UserBundle\Fixtures\ORM
  * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
-class UserSingletonFixtures extends Fixture
+class UserSingletonFixtures extends UserFixtures
 {
 
     /** @var string */
     const REFERENCE = 'user-singleton';
-
-    /** @var PasswordUpdaterInterface */
-    private $passwordUpdater;
-
-    public function __construct(PasswordUpdaterInterface $passwordUpdater)
-    {
-        $this->passwordUpdater = $passwordUpdater;
-    }
 
 
     /**

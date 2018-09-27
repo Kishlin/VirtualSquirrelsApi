@@ -25,6 +25,8 @@ class RegistrationTest extends WebTestCase
      */
     public function testThrowsException(array $parameters)
     {
+        $this->loadFixtures();
+
         $client = $this->makeClient();
         $client->request('POST', '/security/registration/register', $parameters);
 

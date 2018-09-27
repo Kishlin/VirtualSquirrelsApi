@@ -33,7 +33,7 @@ class LoadingController extends FOSRestController
 
 
     /**
-     * @Get("/loading", name="core_loading")
+     * @Get("/loading", name="core_loading", options={ "method_prefix" = false })
      * @View()
      */
     public function loadingAction()

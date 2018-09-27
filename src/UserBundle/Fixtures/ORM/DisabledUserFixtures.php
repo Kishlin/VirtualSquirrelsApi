@@ -8,26 +8,15 @@
 namespace UserBundle\Fixtures\ORM;
 
 
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use FOS\UserBundle\Util\PasswordUpdaterInterface;
 use UserBundle\Entity\User;
 
 /**
  * @package UserBundle\Fixtures\ORM
  * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
-class DisabledUserFixtures extends Fixture
+class DisabledUserFixtures extends UserFixtures
 {
-
-    /** @var PasswordUpdaterInterface */
-    private $passwordUpdater;
-
-    public function __construct(PasswordUpdaterInterface $passwordUpdater)
-    {
-        $this->passwordUpdater = $passwordUpdater;
-    }
-
 
     /**
      * {@inheritdoc}

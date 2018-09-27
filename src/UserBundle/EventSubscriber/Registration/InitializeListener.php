@@ -21,6 +21,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class InitializeListener implements EventSubscriberInterface
 {
 
+    /** @var string */
+    const ERROR_MESSAGE = 'Some required parameters are missing in request.';
+
     /** @var LoggerInterface */
     protected $logger;
 
@@ -55,7 +58,7 @@ class InitializeListener implements EventSubscriberInterface
             return;
 
         $data = array(
-            'message' => 'Some required parameters are missing in request.',
+            'message' => self::ERROR_MESSAGE,
             'requirements' => array(
                 'fos_user_registration_form[email]',
                 'fos_user_registration_form[username]',
@@ -64,7 +67,7 @@ class InitializeListener implements EventSubscriberInterface
             )
         );
 
-        $event->setResponse(new JsonResponse($data));
+        $event->setResponse(new JsonResponse($data, 400));
     }
 
 }

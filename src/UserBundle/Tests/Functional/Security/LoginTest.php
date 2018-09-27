@@ -8,6 +8,7 @@
 namespace UserBundle\Tests\Functional\Security;
 
 
+use UserBundle\Fixtures\ORM\DisabledUserFixtures;
 use UserBundle\Fixtures\ORM\UserSingletonFixtures;
 use UserBundle\Tests\Functional\Util\WebTestCase;
 
@@ -19,41 +20,36 @@ class LoginTest extends WebTestCase
 {
 
     /**
+     * @dataProvider errorProvider
+     * @param array  $parameters
+     * @param string $message
+     * @param array  $fixtures
      * @throws \Exception
      */
-    public function testNonextantUser()
+    public function testErrors(array $parameters, string $message, array $fixtures)
     {
-        $this->loadFixtures();
-
-        $parameters = array('_username' => 'user', '_password' => 'changeme');
+        $this->loadFixtures($fixtures);
 
         $client = $this->makeClient();
-        $client->request('POST', '/security/login', array('fos_user_registration_form' => $parameters));
+        $client->request('POST', '/security/login', $parameters);
 
-        $this->assertStatusCode(200, $client);
+        $this->assertStatusCode(500, $client);
         $this->assertJsonResponse($client);
 
         $this->assertCount(2, $response = json_decode($client->getResponse()->getContent(), true));
-        var_dump($response);
+        $this->assertArrayHasKey('exception', $response);
+        $this->assertArrayHasKey('message', $response);
+
+        $this->assertEquals($message, $response['exception']['message']);
     }
 
-    /**
-     * @throws \Exception
-     */
-    public function testBadCredentials()
+    public function errorProvider()
     {
-        $this->loadFixtures(UserSingletonFixtures::class);
-
-        $parameters = array('_username' => 'user', '_password' => 'wrongPassword');
-
-        $client = $this->makeClient();
-        $client->request('POST', '/security/login', array('fos_user_registration_form' => $parameters));
-
-        $this->assertStatusCode(200, $client);
-        $this->assertJsonResponse($client);
-
-        $this->assertCount(2, $response = json_decode($client->getResponse()->getContent(), true));
-        var_dump($response);
+        return array(
+            array(array('_username' => 'user', '_password' => 'changeme'), 'Bad credentials.', array()),
+            array(array('_username' => 'user', '_password' => 'wrongPassword'), 'Bad credentials.', array(UserSingletonFixtures::class)),
+            array(array('_username' => 'user', '_password' => 'changeme'), 'User account is disabled.', array(DisabledUserFixtures::class)),
+        );
     }
 
     /**
@@ -61,12 +57,12 @@ class LoginTest extends WebTestCase
      */
     public function testGoodCredentials()
     {
-        $this->loadFixtures(UserSingletonFixtures::class);
+        $this->loadFixtures(array(UserSingletonFixtures::class));
 
         $parameters = array('_username' => 'user', '_password' => 'changeme');
 
         $client = $this->makeClient();
-        $client->request('POST', '/security/login', array('fos_user_registration_form' => $parameters));
+        $client->request('POST', '/security/login', $parameters);
 
         $this->assertStatusCode(200, $client);
         $this->assertJsonResponse($client);

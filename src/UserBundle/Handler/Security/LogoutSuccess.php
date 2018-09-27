@@ -22,7 +22,7 @@ class LogoutSuccess implements LogoutSuccessHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function onLogoutSuccess(Request $request)
+    public function onLogoutSuccess(Request $request): JsonResponse
     {
         return new JsonResponse(array('message' => 'User has logged out.'));
     }

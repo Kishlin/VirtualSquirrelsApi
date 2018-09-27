@@ -22,6 +22,7 @@ security:
             security: false
         main:
             pattern: ^/
+            logout_on_user_change: true
             form_login:
                 provider: fos_userbundle
                 check_path: fos_user_security_check

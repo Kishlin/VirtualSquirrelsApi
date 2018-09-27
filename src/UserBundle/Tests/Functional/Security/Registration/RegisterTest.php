@@ -23,7 +23,7 @@ use UserBundle\Tests\Functional\Util\WebTestCase;
  * @package UserBundle\Tests\Security\Registration
  * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
-class RegistrationTest extends WebTestCase
+class RegisterTest extends WebTestCase
 {
 
     const MATCHING_PASSWORD = array('first' => 'changeme', 'second' => 'changeme');

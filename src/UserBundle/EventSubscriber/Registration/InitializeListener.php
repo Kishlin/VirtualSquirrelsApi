@@ -39,7 +39,7 @@ class InitializeListener implements EventSubscriberInterface
     /**
      * {@inheritDoc}
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return array(FOSUserEvents::REGISTRATION_INITIALIZE => 'onInitialize');
     }
@@ -47,7 +47,7 @@ class InitializeListener implements EventSubscriberInterface
     /**
      * @param GetResponseUserEvent $event
      */
-    public function onInitialize(GetResponseUserEvent $event)
+    public function onInitialize(GetResponseUserEvent $event): void
     {
         $this->logger->info($event->getRequest()->request->has('fos_user_registration_form') ? 'true' : 'false');
 

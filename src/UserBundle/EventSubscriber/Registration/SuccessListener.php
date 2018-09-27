@@ -21,6 +21,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class SuccessListener implements EventSubscriberInterface
 {
 
+    /** @var string */
+    const SUCCESS_MESSAGE = 'User was created and logged in.';
+
     /** @var LoggerInterface */
     protected $logger;
 
@@ -36,7 +39,7 @@ class SuccessListener implements EventSubscriberInterface
     /**
      * {@inheritDoc}
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return array(FOSUserEvents::REGISTRATION_SUCCESS => 'onSuccess');
     }
@@ -44,11 +47,9 @@ class SuccessListener implements EventSubscriberInterface
     /**
      * @param FormEvent $event
      */
-    public function onSuccess(FormEvent $event)
+    public function onSuccess(FormEvent $event): void
     {
-        $this->logger->debug('Setting response now that user has registered.');
-
-        $event->setResponse(new JsonResponse(array('message' => 'User was created and logged in.')));
+        $event->setResponse(new JsonResponse(array('message' => self::SUCCESS_MESSAGE)));
     }
 
 }

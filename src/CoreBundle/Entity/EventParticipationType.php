@@ -23,15 +23,6 @@ class EventParticipationType
     /** @var string */
     const REPOSITORY = 'CoreBundle:EventParticipationType';
 
-    /** @var int */
-    const TYPE_POSITIVE = 0;
-
-    /** @var int */
-    const TYPE_NEGATIVE = 1;
-
-    /** @var int */
-    const TYPE_UNSURE = 2;
-
     /**
      * @var int
      *
@@ -119,6 +110,18 @@ class EventParticipationType
     public function getEventParticipationList(): Collection
     {
         return $this->eventParticipationList;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getPossibleTypes(): array
+    {
+        return array(
+            \CoreBundle\Enumerations\EventParticipationType::TYPE_POSITIVE,
+            \CoreBundle\Enumerations\EventParticipationType::TYPE_NEGATIVE,
+            \CoreBundle\Enumerations\EventParticipationType::TYPE_UNSURE
+        );
     }
 
 }

@@ -11,7 +11,7 @@ namespace CoreBundle\Manager;
 use CoreBundle\CoreEvents;
 use CoreBundle\Entity\Event;
 use CoreBundle\Entity\EventParticipation;
-use CoreBundle\Enumerations\EventParticipationType;
+use CoreBundle\Enumerations\EventParticipationType as Enum;
 use CoreBundle\Services\Creator\EventParticipationCreatorInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -39,7 +39,7 @@ class EventManager implements EventManagerInterface
      */
     public function addPositiveParticipation(Event $event, User $user): Event
     {
-        return $this->addParticipation($this->creator->createForType($event, $user, EventParticipationType::TYPE_POSITIVE));
+        return $this->addParticipation($this->creator->createForType($event, $user, Enum::TYPE_POSITIVE));
     }
 
     /**
@@ -47,7 +47,7 @@ class EventManager implements EventManagerInterface
      */
     public function addNegativeParticipation(Event $event, User $user): Event
     {
-        return $this->addParticipation($this->creator->createForType($event, $user, EventParticipationType::TYPE_NEGATIVE));
+        return $this->addParticipation($this->creator->createForType($event, $user, Enum::TYPE_NEGATIVE));
     }
 
     /**
@@ -55,7 +55,7 @@ class EventManager implements EventManagerInterface
      */
     public function addUnsureParticipation(Event $event, User $user): Event
     {
-        return $this->addParticipation($this->creator->createForType($event, $user, EventParticipationType::TYPE_UNSURE));
+        return $this->addParticipation($this->creator->createForType($event, $user, Enum::TYPE_UNSURE));
     }
 
     /**

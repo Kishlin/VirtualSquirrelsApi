@@ -17,6 +17,10 @@ namespace CoreBundle;
 class CoreEvents
 {
 
+    /** @var string */
     const API_LOGIN = 'core.api.login';
+
+    /** @var string */
+    const EVENT_PARTICIPATION_NEW = 'core.event.participation.new';
 
 }

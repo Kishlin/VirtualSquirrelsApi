@@ -23,6 +23,15 @@ class EventParticipationType
     /** @var string */
     const REPOSITORY = 'CoreBundle:EventParticipationType';
 
+    /** @var int */
+    const TYPE_POSITIVE = 0;
+
+    /** @var int */
+    const TYPE_NEGATIVE = 1;
+
+    /** @var int */
+    const TYPE_UNSURE = 2;
+
     /**
      * @var int
      *

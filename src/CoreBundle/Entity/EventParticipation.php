@@ -20,6 +20,9 @@ use UserBundle\Entity\User;
 class EventParticipation
 {
 
+    /** @var string */
+    const REPOSITORY = 'CoreBundle:EventParticipation';
+
     /**
      * @var int
      *

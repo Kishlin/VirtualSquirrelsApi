@@ -20,6 +20,9 @@ use Doctrine\ORM\Mapping as ORM;
 class EventParticipationType
 {
 
+    /** @var string */
+    const REPOSITORY = 'CoreBundle:EventParticipationType';
+
     /**
      * @var int
      *

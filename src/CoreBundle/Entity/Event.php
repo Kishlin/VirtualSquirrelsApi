@@ -19,6 +19,9 @@ use Doctrine\ORM\Mapping as ORM;
 class Event
 {
 
+    /** @var string */
+    const REPOSITORY = 'CoreBundle:Event';
+
     /**
      * @var int
      *

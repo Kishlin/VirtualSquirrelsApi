@@ -8,7 +8,9 @@
 namespace UserBundle\Fixtures\ORM;
 
 
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use FOS\UserBundle\Util\PasswordUpdaterInterface;
 use UserBundle\Entity\User;
 
 /**

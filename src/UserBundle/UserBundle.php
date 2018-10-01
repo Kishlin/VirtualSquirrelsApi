@@ -14,15 +14,4 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  * @package UserBundle
  * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
-class UserBundle extends Bundle
-{
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getParent()
-    {
-        return 'FOSUserBundle';
-    }
-
-}
+class UserBundle extends Bundle { }

@@ -8,14 +8,13 @@
 namespace CoreBundle;
 
 /**
- * Class CoreEvents
- * @package   CoreBundle
- * @author    Pierre-Louis Legrand <hello@pierrelouislegrand.fr>
- * @copyright 2017 Pierre-Louis Legrand
- * @link      http://www.pierrelouislegrand.fr
+ * @package CoreBundle
+ * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
 class CoreEvents
 {
+
+    private function __construct() { }
 
     /** @var string */
     const API_LOGIN = 'core.api.login';

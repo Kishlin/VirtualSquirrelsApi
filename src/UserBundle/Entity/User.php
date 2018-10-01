@@ -8,7 +8,9 @@
 namespace UserBundle\Entity;
 
 
+use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\User as BaseUser;
+use CoreBundle\Entity\NotificationToUser;
 use JMS\Serializer\Annotation as JMS;
 use Doctrine\ORM\Mapping as ORM;
 use UserBundle\UserRoles;
@@ -16,7 +18,6 @@ use UserBundle\UserRoles;
 /**
  * @ORM\Entity
  * @ORM\Table(name="vs_user")
- * @MG\Notifiable(name="user")
  *
  * @JMS\ExclusionPolicy("all")
  */
@@ -36,6 +37,47 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
+    }
+
+
+    /**
+     * @var Collection
+     *
+     * @ORM\OneToMany(targetEntity="CoreBundle\Entity\NotificationToUser", mappedBy="user", cascade={"remove"})
+     */
+    private $notificationToUserList;
+
+
+    /**
+     * @param NotificationToUser $notificationToUserList
+     *
+     * @return User
+     */
+    public function addNotificationToUserList(NotificationToUser $notificationToUserList): User
+    {
+        $this->notificationToUserList[] = $notificationToUserList;
+
+        return $this;
+    }
+
+    /**
+     * @param NotificationToUser $notificationToUserList
+     *
+     * @return User
+     */
+    public function removeNotificationToUserList(NotificationToUser $notificationToUserList): User
+    {
+        $this->notificationToUserList->removeElement($notificationToUserList);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getNotificationToUserList(): Collection
+    {
+        return $this->notificationToUserList;
     }
 
 

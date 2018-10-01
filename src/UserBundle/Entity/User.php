@@ -8,6 +8,8 @@
 namespace UserBundle\Entity;
 
 
+use Mgilet\NotificationBundle\NotifiableInterface;
+use Mgilet\NotificationBundle\Annotation as MG;
 use FOS\UserBundle\Model\User as BaseUser;
 use JMS\Serializer\Annotation as JMS;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,10 +18,11 @@ use UserBundle\UserRoles;
 /**
  * @ORM\Entity
  * @ORM\Table(name="vs_user")
+ * @MG\Notifiable(name="user")
  *
  * @JMS\ExclusionPolicy("all")
  */
-class User extends BaseUser
+class User extends BaseUser implements NotifiableInterface
 {
 
     /**

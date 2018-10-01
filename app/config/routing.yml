@@ -1,7 +1,3 @@
-mgilet_notification:
-    resource: "@MgiletNotificationBundle/Controller/"
-    prefix: /notifications
-
 user:
     resource: "@UserBundle/Resources/config/routing.yml"
     prefix:   /security

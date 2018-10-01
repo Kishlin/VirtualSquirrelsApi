@@ -20,6 +20,7 @@ TO DO
 - User: accounts management.
 - Events: calendar events with subscriptions, and admin/officer edit.
 - Applications: votes and discussion feed for members, with and without the applicant.
+- Notifications: notification system.
 
 Installation & Usage
 --------------------

@@ -8,8 +8,6 @@
 namespace CoreBundle\Entity;
 
 
-use Mgilet\NotificationBundle\Model\Notification as NotificationModel;
-use Mgilet\NotificationBundle\Entity\NotificationInterface;
 use JMS\Serializer\Annotation as JMS;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,4 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @package CoreBundle\Entity
  * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
-class Notification extends NotificationModel implements NotificationInterface { }
+class Notification
+{
+
+}

@@ -21,16 +21,16 @@ interface NotificationFactoryInterface
 
     /**
      * @param NotificationType        $notificationType
+     * @param NotificationTarget|null $target
      * @param \DateTime               $dateTime
      * @param string                  $subject
      * @param string                  $message
-     * @param NotificationTarget|null $target
      * @return Notification
      */
     function new(NotificationType $notificationType,
+                 ?NotificationTarget $target,
                  \DateTime $dateTime,
                  string $subject,
-                 string $message,
-                 NotificationTarget $target = null): Notification;
+                 string $message): Notification;
 
 }

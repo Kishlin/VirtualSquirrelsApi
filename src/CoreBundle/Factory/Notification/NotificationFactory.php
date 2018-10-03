@@ -23,10 +23,10 @@ class NotificationFactory implements NotificationFactoryInterface
      * {@inheritdoc}
      */
     public function new(NotificationType $notificationType,
+                        ?NotificationTarget $target,
                         \DateTime $dateTime,
                         string $subject,
-                        string $message,
-                        NotificationTarget $target = null): Notification
+                        string $message): Notification
     {
         return (new Notification())
             ->setTargetId($target->getId())

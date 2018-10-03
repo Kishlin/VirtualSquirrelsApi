@@ -17,4 +17,7 @@ final class CoreEvents
 
     private function __construct() { }
 
+    /** @var string */
+    const NOTIFICATION_NEW = 'notification.new';
+
 }

@@ -12,7 +12,7 @@ use CoreBundle\CoreEvents;
 use CoreBundle\Entity\Event;
 use CoreBundle\Entity\EventParticipation;
 use CoreBundle\Enumerations\EventParticipationType as Enum;
-use CoreBundle\Services\Creator\EventParticipationCreatorInterface;
+use CoreBundle\Services\Event\EventParticipationCreatorInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use UserBundle\Entity\User;

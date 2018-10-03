@@ -5,7 +5,7 @@
  * Time: 15:10
  */
 
-namespace CoreBundle\Services\Creator;
+namespace CoreBundle\Services\Event;
 
 
 use CoreBundle\Entity\Event;

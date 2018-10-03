@@ -20,13 +20,17 @@ interface NotificationFactoryInterface
 {
 
     /**
-     * @param NotificationTarget $target
-     * @param NotificationType   $notificationType
-     * @param \DateTime          $dateTime
-     * @param string             $subject
-     * @param string             $message
+     * @param NotificationType        $notificationType
+     * @param \DateTime               $dateTime
+     * @param string                  $subject
+     * @param string                  $message
+     * @param NotificationTarget|null $target
      * @return Notification
      */
-    function new(NotificationTarget $target, NotificationType $notificationType, \DateTime $dateTime, string $subject, string $message): Notification;
+    function new(NotificationType $notificationType,
+                 \DateTime $dateTime,
+                 string $subject,
+                 string $message,
+                 NotificationTarget $target = null): Notification;
 
 }

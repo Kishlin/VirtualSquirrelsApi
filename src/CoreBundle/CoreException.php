@@ -20,4 +20,7 @@ final class CoreException
     /** @var int */
     const RUNTIME_EXCEPTION = 666;
 
+    /** @var int */
+    const INVALID_ARGUMENT_EXCEPTION = 100;
+
 }

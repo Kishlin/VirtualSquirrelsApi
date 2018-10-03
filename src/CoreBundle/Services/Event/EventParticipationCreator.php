@@ -10,10 +10,9 @@ namespace CoreBundle\Services\Event;
 
 use CoreBundle\Entity\Event;
 use CoreBundle\Entity\EventParticipation;
-use CoreBundle\Factory\EventParticipationFactoryInterface;
+use CoreBundle\Factory\Event\EventParticipationFactoryInterface;
 use CoreBundle\Manager\EventParticipationTypeManagerInterface;
 use UserBundle\Entity\User;
-
 
 /**
  * @package CoreBundle\Services\Creator

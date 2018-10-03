@@ -12,7 +12,6 @@ use CoreBundle\Entity\Event;
 use CoreBundle\Entity\EventParticipation;
 use UserBundle\Entity\User;
 
-
 /**
  * @package CoreBundle\Services\Creator
  * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>

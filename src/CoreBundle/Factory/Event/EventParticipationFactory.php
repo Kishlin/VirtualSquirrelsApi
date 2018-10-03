@@ -5,14 +5,13 @@
  * Time: 13:04
  */
 
-namespace CoreBundle\Factory;
+namespace CoreBundle\Factory\Event;
 
 
 use CoreBundle\Entity\Event;
 use CoreBundle\Entity\EventParticipation;
 use CoreBundle\Entity\EventParticipationType;
 use UserBundle\Entity\User;
-
 
 /**
  * @package CoreBundle\Factory

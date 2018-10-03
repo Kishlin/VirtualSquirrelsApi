@@ -17,4 +17,13 @@ final class NotificationTypeEnum
 
     private function __construct() { }
 
+
+    /**
+     * @return array
+     */
+    public static function getPossibleTypes(): array
+    {
+        return array();
+    }
+
 }

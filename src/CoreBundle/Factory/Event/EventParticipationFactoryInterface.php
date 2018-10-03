@@ -8,9 +8,9 @@
 namespace CoreBundle\Factory\Event;
 
 
-use CoreBundle\Entity\Event;
-use CoreBundle\Entity\EventParticipation;
-use CoreBundle\Entity\EventParticipationType;
+use CoreBundle\Entity\Event\Event;
+use CoreBundle\Entity\Event\EventParticipation;
+use CoreBundle\Entity\Event\EventParticipationType;
 use UserBundle\Entity\User;
 
 /**

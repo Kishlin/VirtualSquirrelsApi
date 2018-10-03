@@ -5,13 +5,12 @@
  * Time: 15:00
  */
 
-namespace CoreBundle\Manager;
+namespace CoreBundle\Manager\Event;
 
 
-use CoreBundle\Entity\EventParticipationType;
-use CoreBundle\Repository\EventParticipationTypeRepository;
+use CoreBundle\Entity\Event\EventParticipationType;
+use CoreBundle\Repository\Event\EventParticipationTypeRepository;
 use Doctrine\Common\Persistence\ObjectManager;
-
 
 /**
  * @package CoreBundle\Manager

@@ -5,10 +5,10 @@
  * Time: 13:07
  */
 
-namespace CoreBundle\Manager;
+namespace CoreBundle\Manager\Event;
 
 
-use CoreBundle\Entity\Event;
+use CoreBundle\Entity\Event\Event;
 use UserBundle\Entity\User;
 
 /**

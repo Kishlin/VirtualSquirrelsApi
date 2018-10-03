@@ -5,17 +5,16 @@
  * Time: 14:49
  */
 
-namespace CoreBundle\Manager;
+namespace CoreBundle\Manager\Event;
 
 
-use CoreBundle\Entity\Event;
-use CoreBundle\Entity\EventParticipation;
+use CoreBundle\Entity\Event\Event;
+use CoreBundle\Entity\Event\EventParticipation;
 use CoreBundle\Enum\EventParticipationTypeEnum;
 use CoreBundle\Services\Event\EventParticipationCreatorInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use UserBundle\Entity\User;
-
 
 /**
  * @package CoreBundle\Manager
@@ -63,9 +62,10 @@ class EventManager implements EventManagerInterface
      */
     private function addParticipation(EventParticipation $eventParticipation): Event
     {
-        // TODO Trigger event to remove current participations.
+        // TODO Trigger event to remove current participation.
 
-        $event = $kernelEvent->getEvent();
+        $event = $eventParticipation->getEvent();
+
         $this->objectManager->persist($eventParticipation);
         if (!$this->objectManager->contains($event)) $this->objectManager->persist($event);
 

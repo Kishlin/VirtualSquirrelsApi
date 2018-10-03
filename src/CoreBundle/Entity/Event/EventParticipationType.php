@@ -5,7 +5,7 @@
  * Time: 12:23
  */
 
-namespace CoreBundle\Entity;
+namespace CoreBundle\Entity\Event;
 
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  * EventParticipationType
  *
  * @ORM\Table(name="vs_event_participation_type")
- * @ORM\Entity(repositoryClass="UserBundle\Repository\EventParticipationTypeRepository")
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\Event\EventParticipationTypeRepository")
  */
 class EventParticipationType
 {

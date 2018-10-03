@@ -5,10 +5,10 @@
  * Time: 15:00
  */
 
-namespace CoreBundle\Manager;
+namespace CoreBundle\Manager\Event;
 
 
-use CoreBundle\Entity\EventParticipationType;
+use CoreBundle\Entity\Event\EventParticipationType;
 
 /**
  * @package CoreBundle\Manager

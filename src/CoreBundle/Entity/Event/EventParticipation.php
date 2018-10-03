@@ -5,7 +5,7 @@
  * Time: 12:23
  */
 
-namespace CoreBundle\Entity;
+namespace CoreBundle\Entity\Event;
 
 
 use Doctrine\ORM\Mapping as ORM;
@@ -15,7 +15,7 @@ use UserBundle\Entity\User;
  * EventParticipation
  *
  * @ORM\Table(name="vs_event_participation", uniqueConstraints={@ORM\UniqueConstraint(name="participation", columns={"eventId", "userId"})})
- * @ORM\Entity(repositoryClass="UserBundle\Repository\EventParticipationRepository")
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\Event\EventParticipationRepository")
  */
 class EventParticipation
 {

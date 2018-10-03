@@ -11,7 +11,7 @@ namespace UserBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\User as BaseUser;
-use CoreBundle\Entity\EventParticipation;
+use CoreBundle\Entity\Event\EventParticipation;
 use CoreBundle\Entity\Notification\NotificationToUser;
 use JMS\Serializer\Annotation as JMS;
 use Doctrine\ORM\Mapping as ORM;
@@ -42,7 +42,7 @@ class User extends BaseUser
     /**
      * @var Collection
      *
-     * @ORM\OneToMany(targetEntity="CoreBundle\Entity\EventParticipation", mappedBy="participant", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="CoreBundle\Entity\Event\EventParticipation", mappedBy="participant", cascade={"remove"})
      */
     private $eventParticipationList;
 

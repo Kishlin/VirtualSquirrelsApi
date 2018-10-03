@@ -8,10 +8,10 @@
 namespace CoreBundle\Services\Event;
 
 
-use CoreBundle\Entity\Event;
-use CoreBundle\Entity\EventParticipation;
+use CoreBundle\Entity\Event\Event;
+use CoreBundle\Entity\Event\EventParticipation;
 use CoreBundle\Factory\Event\EventParticipationFactoryInterface;
-use CoreBundle\Manager\EventParticipationTypeManagerInterface;
+use CoreBundle\Manager\Event\EventParticipationTypeManagerInterface;
 use UserBundle\Entity\User;
 
 /**

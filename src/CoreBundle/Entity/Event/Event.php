@@ -5,7 +5,7 @@
  * Time: 11:50
  */
 
-namespace CoreBundle\Entity;
+namespace CoreBundle\Entity\Event;
 
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="vs_event")
- * @ORM\Entity(repositoryClass="CoreBundle\Repository\EventRepository")
+ * @ORM\Entity(repositoryClass="CoreBundle\Repository\Event\EventRepository")
  */
 class Event
 {

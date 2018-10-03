@@ -5,7 +5,7 @@
  * Time: 12:23
  */
 
-namespace CoreBundle\Repository;
+namespace CoreBundle\Repository\Event;
 
 
 use Doctrine\ORM\EntityRepository;
@@ -14,7 +14,7 @@ use Doctrine\ORM\EntityRepository;
  * @package CoreBundle\Repository
  * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
-class EventParticipationRepository extends EntityRepository
+class EventParticipationTypeRepository extends EntityRepository
 {
 
 }

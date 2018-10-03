@@ -8,7 +8,8 @@
 namespace CoreBundle\Fixtures\ORM;
 
 
-use CoreBundle\Entity\EventParticipationType;
+use CoreBundle\Entity\Event\EventParticipationType;
+use CoreBundle\Enum\EventParticipationTypeEnum;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -24,7 +25,7 @@ class EventParticipationTypeFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        foreach (EventParticipationType::getPossibleTypes() as $type) {
+        foreach (EventParticipationTypeEnum::getPossibleTypes() as $type) {
             $eventParticipationType = new EventParticipationType();
             $eventParticipationType->setType($type);
 

@@ -2,10 +2,10 @@
 /**
  * User: Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  * Date: 28/09/2018
- * Time: 12:23
+ * Time: 11:50
  */
 
-namespace CoreBundle\Repository;
+namespace CoreBundle\Repository\Event;
 
 
 use Doctrine\ORM\EntityRepository;
@@ -14,7 +14,7 @@ use Doctrine\ORM\EntityRepository;
  * @package CoreBundle\Repository
  * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
-class EventParticipationTypeRepository extends EntityRepository
+class EventRepository extends EntityRepository
 {
 
 }

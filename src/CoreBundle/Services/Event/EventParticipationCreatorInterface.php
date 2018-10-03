@@ -8,8 +8,8 @@
 namespace CoreBundle\Services\Event;
 
 
-use CoreBundle\Entity\Event;
-use CoreBundle\Entity\EventParticipation;
+use CoreBundle\Entity\Event\Event;
+use CoreBundle\Entity\Event\EventParticipation;
 use UserBundle\Entity\User;
 
 /**

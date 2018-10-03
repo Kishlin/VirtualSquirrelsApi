@@ -16,8 +16,8 @@ use Doctrine\ORM\Mapping as ORM;
 use UserBundle\UserRoles;
 
 /**
- * @ORM\Entity
  * @ORM\Table(name="vs_user")
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
  *
  * @JMS\ExclusionPolicy("all")
  */

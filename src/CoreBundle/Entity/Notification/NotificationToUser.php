@@ -5,7 +5,7 @@
  * Time: 5:43 PM
  */
 
-namespace CoreBundle\Entity;
+namespace CoreBundle\Entity\Notification;
 
 
 use Doctrine\ORM\Mapping as ORM;
@@ -13,7 +13,7 @@ use UserBundle\Entity\User;
 
 /**
  * @ORM\Table(name="vs_notification_to_user")
- * @ORM\Entity(repositoryClass="CoreBundle\Repository\NotificationToUserRepository")
+ * @ORM\Entity(repositoryClass="CoreBundle\Repository\Notification\NotificationToUserRepository")
  *
  * @package CoreBundle\Entity
  * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>

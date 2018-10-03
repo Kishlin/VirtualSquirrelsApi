@@ -10,7 +10,7 @@ namespace UserBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\User as BaseUser;
-use CoreBundle\Entity\NotificationToUser;
+use CoreBundle\Entity\Notification\NotificationToUser;
 use JMS\Serializer\Annotation as JMS;
 use Doctrine\ORM\Mapping as ORM;
 use UserBundle\UserRoles;
@@ -46,7 +46,7 @@ class User extends BaseUser
     /**
      * @var Collection
      *
-     * @ORM\OneToMany(targetEntity="CoreBundle\Entity\NotificationToUser", mappedBy="user", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="CoreBundle\Entity\Notification\NotificationToUser", mappedBy="user", cascade={"remove"})
      */
     private $notificationToUserList;
 

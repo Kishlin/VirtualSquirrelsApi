@@ -10,10 +10,10 @@ namespace CoreBundle\Manager\Notification;
 
 use Psr\Log\LoggerInterface;
 use CoreBundle\Manager\BaseManager;
-use CoreBundle\Entity\NotificationType;
+use CoreBundle\Entity\Notification\NotificationType;
 use CoreBundle\Exception\RuntimeException;
 use Doctrine\Common\Persistence\ObjectManager;
-use CoreBundle\Repository\NotificationTypeRepository;
+use CoreBundle\Repository\Notification\NotificationTypeRepository;
 use CoreBundle\Factory\Notification\NotificationTypeFactoryInterface;
 
 /**

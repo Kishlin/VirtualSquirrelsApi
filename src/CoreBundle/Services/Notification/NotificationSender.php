@@ -10,9 +10,9 @@ namespace CoreBundle\Services\Notification;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use CoreBundle\Event\Notification\NewNotificationEvent;
+use CoreBundle\Entity\Notification\Notification;
 use UserBundle\Manager\UserManagerInterface;
 use CoreBundle\Model\NotificationTarget;
-use CoreBundle\Entity\Notification;
 use Psr\Log\LoggerInterface;
 use UserBundle\Entity\User;
 use CoreBundle\CoreEvents;

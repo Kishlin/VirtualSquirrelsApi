@@ -5,10 +5,10 @@
  * Time: 5:43 PM
  */
 
-namespace CoreBundle\Repository;
+namespace CoreBundle\Repository\Notification;
 
 
-use CoreBundle\Entity\NotificationType;
+use CoreBundle\Entity\Notification\NotificationType;
 
 /**
  * @package CoreBundle\Repository

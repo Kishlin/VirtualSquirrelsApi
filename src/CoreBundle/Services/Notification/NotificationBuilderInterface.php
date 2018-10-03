@@ -8,7 +8,7 @@
 namespace CoreBundle\Services\Notification;
 
 
-use CoreBundle\Entity\Notification;
+use CoreBundle\Entity\Notification\Notification;
 use CoreBundle\Model\NotificationTarget;
 
 

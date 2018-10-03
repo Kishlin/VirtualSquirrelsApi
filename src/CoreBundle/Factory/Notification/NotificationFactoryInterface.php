@@ -8,8 +8,8 @@
 namespace CoreBundle\Factory\Notification;
 
 
-use CoreBundle\Entity\Notification;
-use CoreBundle\Entity\NotificationType;
+use CoreBundle\Entity\Notification\Notification;
+use CoreBundle\Entity\Notification\NotificationType;
 use CoreBundle\Model\NotificationTarget;
 
 /**

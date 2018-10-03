@@ -8,7 +8,7 @@
 namespace CoreBundle\Manager\Notification;
 
 
-use CoreBundle\Entity\NotificationToUser;
+use CoreBundle\Entity\Notification\NotificationToUser;
 
 /**
  * @package CoreBundle\Manager

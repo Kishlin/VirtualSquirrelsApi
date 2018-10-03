@@ -8,7 +8,7 @@
 namespace CoreBundle\Services\Notification;
 
 
-use CoreBundle\Entity\Notification;
+use CoreBundle\Entity\Notification\Notification;
 use CoreBundle\Enum\NotificationTypeEnum;
 use CoreBundle\Exception\InvalidArgumentException;
 use CoreBundle\Factory\Notification\NotificationFactoryInterface;
@@ -39,8 +39,8 @@ class NotificationBuilder implements NotificationBuilderInterface
     public function __construct(NotificationTypeManagerInterface $notificationTypeManager, NotificationFactoryInterface $notificationFactory, LoggerInterface $logger)
     {
         $this->notificationTypeManager = $notificationTypeManager;
-        $this->notificationFactory = $notificationFactory;
-        $this->logger = $logger;
+        $this->notificationFactory     = $notificationFactory;
+        $this->logger                  = $logger;
     }
 
 

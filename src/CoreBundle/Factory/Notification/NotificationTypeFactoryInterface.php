@@ -8,7 +8,7 @@
 namespace CoreBundle\Factory\Notification;
 
 
-use CoreBundle\Entity\NotificationType;
+use CoreBundle\Entity\Notification\NotificationType;
 
 /**
  * @package CoreBundle\Factory

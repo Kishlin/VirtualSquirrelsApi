@@ -5,13 +5,13 @@
  * Time: 5:43 PM
  */
 
-namespace CoreBundle\Repository;
+namespace CoreBundle\Repository\Notification;
 
 
 /**
  * @package CoreBundle\Repository
  * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
-class NotificationRepository extends \Doctrine\ORM\EntityRepository
+class NotificationToUserRepository extends \Doctrine\ORM\EntityRepository
 {
 }

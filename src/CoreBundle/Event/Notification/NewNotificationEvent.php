@@ -8,7 +8,7 @@
 namespace CoreBundle\Event\Notification;
 
 
-use CoreBundle\Entity\Notification;
+use CoreBundle\Entity\Notification\Notification;
 use Symfony\Component\EventDispatcher\Event;
 use UserBundle\Entity\User;
 

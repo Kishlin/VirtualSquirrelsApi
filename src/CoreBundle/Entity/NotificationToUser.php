@@ -21,6 +21,9 @@ use UserBundle\Entity\User;
 class NotificationToUser
 {
 
+    /** @var string */
+    const REPOSITORY = 'CoreBundle:NotificationToUser';
+
     /**
      * @var int
      *

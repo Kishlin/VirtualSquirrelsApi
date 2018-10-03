@@ -21,6 +21,9 @@ use Doctrine\ORM\Mapping as ORM;
 class NotificationType
 {
 
+    /** @var string */
+    const REPOSITORY = 'CoreBundle:NotificationType';
+
     /**
      * @var int
      *

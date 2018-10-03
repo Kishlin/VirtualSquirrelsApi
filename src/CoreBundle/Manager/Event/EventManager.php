@@ -57,13 +57,19 @@ class EventManager implements EventManagerInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function addBackupParticipation(Event $event, User $user): Event
+    {
+        return $this->addParticipation($this->creator->createForType($event, $user, EventParticipationTypeEnum::TYPE_BACKUP));
+    }
+
+    /**
      * @param EventParticipation $eventParticipation
      * @return Event
      */
     private function addParticipation(EventParticipation $eventParticipation): Event
     {
-        // TODO Trigger event to remove current participation.
-
         $event = $eventParticipation->getEvent();
 
         $this->objectManager->persist($eventParticipation);

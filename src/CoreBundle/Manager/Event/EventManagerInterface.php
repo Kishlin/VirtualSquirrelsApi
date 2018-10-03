@@ -39,4 +39,11 @@ interface EventManagerInterface
      */
     function addUnsureParticipation(Event $event, User $user): Event;
 
+    /**
+     * @param Event $event
+     * @param User  $user
+     * @return Event
+     */
+    function addBackupParticipation(Event $event, User $user): Event;
+
 }

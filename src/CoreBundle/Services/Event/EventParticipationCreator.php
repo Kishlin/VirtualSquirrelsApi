@@ -45,8 +45,6 @@ class EventParticipationCreator implements EventParticipationCreatorInterface
     {
         $type = $this->typeManager->getByType($type);
 
-        // TODO Type can be null if not found.
-
         return $this->factory->newEventParticipation($event, $type, $user);
     }
 

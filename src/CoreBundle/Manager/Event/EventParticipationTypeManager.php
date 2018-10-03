@@ -9,6 +9,7 @@ namespace CoreBundle\Manager\Event;
 
 
 use CoreBundle\Entity\Event\EventParticipationType;
+use CoreBundle\Factory\Event\EventParticipationTypeFactoryInterface;
 use CoreBundle\Repository\Event\EventParticipationTypeRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -22,23 +23,52 @@ class EventParticipationTypeManager implements EventParticipationTypeManagerInte
     /** @var ObjectManager */
     protected $objectManager;
 
+    /** @var EventParticipationTypeFactoryInterface */
+    protected $factory;
+
     /**
-     * @param ObjectManager $objectManager
+     * @param ObjectManager                          $objectManager
+     * @param EventParticipationTypeFactoryInterface $eventParticipationTypeFactory
      */
-    public function __construct(ObjectManager $objectManager)
+    public function __construct(ObjectManager $objectManager, EventParticipationTypeFactoryInterface $eventParticipationTypeFactory)
     {
         $this->objectManager = $objectManager;
+        $this->factory       = $eventParticipationTypeFactory;
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function save(EventParticipationType $eventParticipationType): void
+    {
+        $this->objectManager->persist($eventParticipationType);
+
+        $this->objectManager->flush();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getByType(int $type): ?EventParticipationType
+    public function getByType(int $type): EventParticipationType
     {
-        /** @var EventParticipationType $object */
-        $object = $this->getRepository()->findOneBy(array('type' => $type));
+        /** @var EventParticipationType $eventParticipationType */
+        $eventParticipationType = $this->getRepository()->findOneBy(array('type' => $type));
 
-        return $object;
+        return $eventParticipationType ?? $this->createNonexistentEventParticipationType($type);
+    }
+
+    /**
+     * @param int $type
+     * @return EventParticipationType
+     */
+    private function createNonexistentEventParticipationType(int $type): EventParticipationType
+    {
+        $eventParticipationType = $this->factory->new($type);
+
+        $this->save($eventParticipationType);
+
+        return $eventParticipationType;
     }
 
     /**

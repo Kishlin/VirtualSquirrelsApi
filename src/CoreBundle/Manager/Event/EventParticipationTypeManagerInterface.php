@@ -19,8 +19,13 @@ interface EventParticipationTypeManagerInterface
 
     /**
      * @param int $type
-     * @return null|EventParticipationType
+     * @return EventParticipationType
      */
-    function getByType(int $type): ?EventParticipationType;
+    function getByType(int $type): EventParticipationType;
+
+    /**
+     * @param EventParticipationType $eventParticipationType
+     */
+    function save(EventParticipationType $eventParticipationType): void;
 
 }

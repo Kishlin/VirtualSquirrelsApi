@@ -12,7 +12,7 @@ namespace CoreBundle\Enum;
  * @package CoreBundle\Enumerations
  * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
-class EventParticipationTypeEnum
+final class EventParticipationTypeEnum
 {
 
     private function __construct() { }
@@ -26,6 +26,9 @@ class EventParticipationTypeEnum
     /** @var int */
     const TYPE_UNSURE = 2;
 
+    /** @var int */
+    const TYPE_BACKUP = 3;
+
 
     /**
      * @return array
@@ -35,7 +38,8 @@ class EventParticipationTypeEnum
         return array(
             self::TYPE_POSITIVE,
             self::TYPE_NEGATIVE,
-            self::TYPE_UNSURE
+            self::TYPE_UNSURE,
+            self::TYPE_BACKUP
         );
     }
 

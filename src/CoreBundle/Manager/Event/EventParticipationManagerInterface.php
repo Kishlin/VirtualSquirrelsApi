@@ -10,7 +10,6 @@ namespace CoreBundle\Manager\Event;
 
 use CoreBundle\Entity\Event\Event;
 use UserBundle\Entity\User;
-use UserBundle\UserRoles;
 
 /**
  * @package CoreBundle\Manager

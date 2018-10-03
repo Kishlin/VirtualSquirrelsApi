@@ -9,8 +9,6 @@ namespace CoreBundle\Manager\Event;
 
 
 use CoreBundle\Entity\Event\Event;
-use CoreBundle\Entity\Event\EventParticipation;
-use CoreBundle\Enum\EventParticipationTypeEnum;
 use CoreBundle\Services\Event\EventParticipationCreatorInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use UserBundle\Entity\User;

@@ -5,10 +5,11 @@
  * Time: 12:16
  */
 
-namespace CoreBundle\Event;
+namespace CoreBundle\Event\Notification;
 
 
 use CoreBundle\Entity\Notification;
+use Symfony\Component\EventDispatcher\Event;
 use UserBundle\Entity\User;
 
 
@@ -16,7 +17,7 @@ use UserBundle\Entity\User;
  * @package CoreBundle\Event
  * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
-class NotificationNewEvent
+class NewNotificationEvent extends Event
 {
 
     /** @var User[] */

@@ -5,7 +5,7 @@
  * Time: 18:08
  */
 
-namespace CoreBundle\Factory;
+namespace CoreBundle\Factory\Notification;
 
 
 use CoreBundle\Entity\Notification;

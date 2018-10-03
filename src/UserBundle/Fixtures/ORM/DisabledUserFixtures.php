@@ -9,7 +9,6 @@ namespace UserBundle\Fixtures\ORM;
 
 
 use Doctrine\Common\Persistence\ObjectManager;
-use UserBundle\Entity\User;
 
 /**
  * @package UserBundle\Fixtures\ORM
@@ -23,13 +22,7 @@ class DisabledUserFixtures extends UserFixtures
      */
     public function load(ObjectManager $manager): void
     {
-        $user = new User();
-
-        $user->setUsername('user');
-        $user->setPlainPassword('changeme');
-        $user->setEmail('example@gmail.com');
-
-        $this->passwordUpdater->hashPassword($user);
+        $user = $this->factory->createUser('disabled');
 
         $manager->persist($user);
         $manager->flush();

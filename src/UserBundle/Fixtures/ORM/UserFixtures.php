@@ -9,7 +9,7 @@ namespace UserBundle\Fixtures\ORM;
 
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use FOS\UserBundle\Util\PasswordUpdaterInterface;
+use UserBundle\Tests\Util\Factory\UserFactory;
 
 /**
  * @package UserBundle\Fixtures\ORM
@@ -18,12 +18,15 @@ use FOS\UserBundle\Util\PasswordUpdaterInterface;
 abstract class UserFixtures extends Fixture
 {
 
-    /** @var PasswordUpdaterInterface */
-    protected $passwordUpdater;
+    /** @var UserFactory */
+    protected $factory;
 
-    public function __construct(PasswordUpdaterInterface $passwordUpdater)
+    /**
+     * @param UserFactory $factory
+     */
+    public function __construct(UserFactory $factory)
     {
-        $this->passwordUpdater = $passwordUpdater;
+        $this->factory = $factory;
     }
 
 }

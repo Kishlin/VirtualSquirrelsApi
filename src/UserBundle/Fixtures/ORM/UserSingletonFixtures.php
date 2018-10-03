@@ -8,10 +8,7 @@
 namespace UserBundle\Fixtures\ORM;
 
 
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use FOS\UserBundle\Util\PasswordUpdaterInterface;
-use UserBundle\Entity\User;
 
 /**
  * @package UserBundle\Fixtures\ORM
@@ -29,14 +26,7 @@ class UserSingletonFixtures extends UserFixtures
      */
     public function load(ObjectManager $manager): void
     {
-        $user = new User();
-
-        $user->setEnabled(true);
-        $user->setUsername('user');
-        $user->setPlainPassword('changeme');
-        $user->setEmail('example@gmail.com');
-
-        $this->passwordUpdater->hashPassword($user);
+        $user = $this->factory->createUser('user');
 
         $manager->persist($user);
         $manager->flush();

@@ -5,14 +5,14 @@
  * Time: 13:01
  */
 
-namespace CoreBundle\Enumerations;
+namespace CoreBundle\Enum;
 
 
 /**
  * @package CoreBundle\Enumerations
  * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
-class EventParticipationType
+class EventParticipationTypeEnum
 {
 
     private function __construct() { }
@@ -25,5 +25,18 @@ class EventParticipationType
 
     /** @var int */
     const TYPE_UNSURE = 2;
+
+
+    /**
+     * @return array
+     */
+    public static function getPossibleTypes(): array
+    {
+        return array(
+            self::TYPE_POSITIVE,
+            self::TYPE_NEGATIVE,
+            self::TYPE_UNSURE
+        );
+    }
 
 }

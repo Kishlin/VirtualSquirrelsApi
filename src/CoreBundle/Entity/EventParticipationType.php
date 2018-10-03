@@ -7,6 +7,7 @@
 
 namespace CoreBundle\Entity;
 
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -110,18 +111,6 @@ class EventParticipationType
     public function getEventParticipationList(): Collection
     {
         return $this->eventParticipationList;
-    }
-
-    /**
-     * @return array
-     */
-    public static function getPossibleTypes(): array
-    {
-        return array(
-            \CoreBundle\Enumerations\EventParticipationType::TYPE_POSITIVE,
-            \CoreBundle\Enumerations\EventParticipationType::TYPE_NEGATIVE,
-            \CoreBundle\Enumerations\EventParticipationType::TYPE_UNSURE
-        );
     }
 
 }

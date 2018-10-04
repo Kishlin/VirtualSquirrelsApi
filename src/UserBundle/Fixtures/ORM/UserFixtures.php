@@ -9,7 +9,7 @@ namespace UserBundle\Fixtures\ORM;
 
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use UserBundle\Tests\Util\Factory\UserFactory;
+use UserBundle\Fixtures\Util\Factory\UserFactory;
 
 /**
  * @package UserBundle\Fixtures\ORM

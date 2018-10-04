@@ -19,9 +19,9 @@ TO DO
 #### Road map to first release:
 
 * User
-- Change password / email / details.
-- Officers can promote/demote roles.
-- Password reset.
+Change password / email / details.
+Officers can promote/demote roles.
+Password reset.
 
 * Events
 Officers can force participation.

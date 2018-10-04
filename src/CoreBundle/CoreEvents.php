@@ -21,7 +21,16 @@ final class CoreEvents
     const API_LOGIN = 'core.api.login';
 
     /** @var string */
-    const EVENT_PARTICIPATION_NEW = 'core.event.participation.new';
+    const EVENT_ADD_PARTICIPATION_INITIALIZE = 'event.add.participation.initialize';
+
+    /** @var string */
+    const EVENT_ADD_PARTICIPATION_FINALIZE = 'event.add.participation.finalize';
+
+    /** @var string */
+    const EVENT_REMOVE_PARTICIPATION_INITIALIZE = 'event.remove.participation.initialize';
+
+    /** @var string */
+    const EVENT_REMOVE_PARTICIPATION_FINALIZE = 'event.remove.participation.finalize';
 
     /** @var string */
     const NOTIFICATION_NEW = 'notification.new';

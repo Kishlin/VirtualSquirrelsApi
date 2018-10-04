@@ -1,14 +1,15 @@
 <?php
 /**
  * User: Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
- * Date: 01/10/2018
- * Time: 11:27
+ * Date: 03/10/2018
+ * Time: 12:16
  */
 
-namespace CoreBundle\Event;
+namespace CoreBundle\Event\Notification;
 
 
-use Mgilet\NotificationBundle\Model\Notification;
+use CoreBundle\Entity\Notification\Notification;
+use Symfony\Component\EventDispatcher\Event;
 use UserBundle\Entity\User;
 
 
@@ -16,32 +17,32 @@ use UserBundle\Entity\User;
  * @package CoreBundle\Event
  * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
-class NotificationEvent
+class NewNotificationEvent extends Event
 {
 
-    /** @var User */
-    protected $user;
+    /** @var User[] */
+    protected $userList;
 
     /** @var Notification */
     protected $notification;
 
     /**
-     * @param User         $user
+     * @param User[]       $userList
      * @param Notification $notification
      */
-    public function __construct(User $user, Notification $notification)
+    public function __construct(array $userList, Notification $notification)
     {
-        $this->user = $user;
+        $this->userList     = $userList;
         $this->notification = $notification;
     }
 
 
     /**
-     * @return User
+     * @return User[]
      */
-    public function getUser(): User
+    public function getUserList(): array
     {
-        return $this->user;
+        return $this->userList;
     }
 
     /**

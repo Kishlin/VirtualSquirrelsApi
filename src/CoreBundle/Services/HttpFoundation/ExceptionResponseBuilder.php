@@ -10,6 +10,8 @@ namespace CoreBundle\Services\HttpFoundation;
 
 use Monolog\Logger;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @package CoreBundle\Services\HttpFoundation
@@ -17,9 +19,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  */
 class ExceptionResponseBuilder implements ExceptionResponseBuilderInterface
 {
-
-    /** @var string */
-    const MESSAGE = 'An exception occurred in kernel.';
 
     /** @var Logger Logger */
     protected $logger;
@@ -60,7 +59,25 @@ class ExceptionResponseBuilder implements ExceptionResponseBuilderInterface
             $array['exception']['trace']   = $exception->getTraceAsString();
         }
 
-        return new JsonResponse($array, 500);
+        $code = $this->getStatusCode($exception);
+
+        return new JsonResponse($array, $code);
+    }
+
+    /**
+     * @param \Exception $e
+     * @return int
+     */
+    protected function getStatusCode(\Exception $e): int
+    {
+        switch (get_class($e)) {
+            case AccessDeniedException::class:
+                return 403;
+            case NotFoundHttpException::class:
+                return 404;
+            default:
+                return 500;
+        }
     }
 
 }

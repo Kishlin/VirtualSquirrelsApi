@@ -63,8 +63,6 @@ doctrine:
         auto_generate_proxy_classes: '%kernel.debug%'
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
-        resolve_target_entities:
-            Mgilet\NotificationBundle\Entity\Notification: CoreBundle\Entity\Notification
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -78,6 +76,9 @@ sensio_framework_extra:
     router:
         annotations: false
     view: { annotations: true }
+    request:
+        converters: true
+        auto_convert: true
 
 fos_user:
     db_driver: orm
@@ -116,6 +117,8 @@ jms_serializer:
       FOSUserBundle:
         namespace_prefix: "FOS\\UserBundle"
         path: "@UserBundle/Resources/config/serializer/fos"
+  property_naming:
+    id: 'jms_serializer.identical_property_naming_strategy'
 
 user:
   login_redirect: 'core_loading'

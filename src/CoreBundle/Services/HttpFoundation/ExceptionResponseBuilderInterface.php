@@ -17,6 +17,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 interface ExceptionResponseBuilderInterface
 {
 
+    /** @var string */
+    const MESSAGE = 'An exception occurred in kernel.';
+
     /**
      * @param \Exception $exception
      * @return JsonResponse

@@ -2,3 +2,18 @@ core_whoami:
   path:     /whoami
   defaults: { _controller: CoreBundle:Auth:whoAmI }
   methods:  [GET]
+
+event_participation_add:
+  path:    /event/{eventId}/participation/add/{type}
+  defaults: { _controller: CoreBundle:Event/Participation:add }
+  methods:  [POST]
+  requirements:
+    eventId: '\d+'
+    type: '\d+'
+
+event_participation_remove:
+  path:    /event/{eventId}/participation/remove
+  defaults: { _controller: CoreBundle:Event/Participation:remove }
+  methods:  [POST]
+  requirements:
+    eventId: '\d+'

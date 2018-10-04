@@ -15,7 +15,7 @@ use UserBundle\Entity\User;
  * @package CoreBundle\Event\Event
  * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
-class AddParticipationInitializeEvent extends \Symfony\Component\EventDispatcher\Event implements HasEventParticipationInterface
+class AddParticipationInitializeEvent extends \Symfony\Component\EventDispatcher\Event implements HasEventParticipationTypeInterface
 {
 
     /** @var User */

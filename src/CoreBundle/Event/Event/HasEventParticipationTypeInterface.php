@@ -14,7 +14,7 @@ use UserBundle\Event\UserEventInterface;
  * @package CoreBundle\Event\Event\Model
  * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
-interface HasEventParticipationInterface extends HasEventInterface, UserEventInterface
+interface HasEventParticipationTypeInterface extends HasEventInterface, UserEventInterface
 {
 
     /**

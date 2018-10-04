@@ -8,6 +8,7 @@
 namespace CoreBundle\Tests\Functional\Util;
 
 
+use CoreBundle\Services\HttpFoundation\ExceptionResponseBuilderInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Liip\FunctionalTestBundle\Test\WebTestCase as BaseClass;
@@ -41,6 +42,24 @@ class WebTestCase extends BaseClass
     public function assertJsonResponse(Client $client): void
     {
         $this->assertEquals('application/json', $client->getResponse()->headers->get('content-type'));
+    }
+
+    /**
+     * @param Client $client
+     * @param int    $code
+     * @throws \Exception
+     */
+    public function assertErrorResponse(Client $client, int $code = 500): void
+    {
+        $this->assertStatusCode($code, $client);
+        $this->assertJsonResponse($client);
+
+        $response = json_decode($client->getResponse()->getContent(), true);
+        $this->assertArrayHasKey('message',   $response);
+        $this->assertArrayHasKey('exception', $response);
+        $this->assertArrayHasKey('message',   $response['exception']);
+
+        $this->assertEquals(ExceptionResponseBuilderInterface::MESSAGE, $response['message']);
     }
 
     /**

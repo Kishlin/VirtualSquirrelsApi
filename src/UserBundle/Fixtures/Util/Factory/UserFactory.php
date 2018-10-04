@@ -5,7 +5,7 @@
  * Time: 16:27
  */
 
-namespace UserBundle\Tests\Util\Factory;
+namespace UserBundle\Fixtures\Util\Factory;
 
 
 use FOS\UserBundle\Util\PasswordUpdaterInterface;

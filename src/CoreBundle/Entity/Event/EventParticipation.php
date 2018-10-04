@@ -15,13 +15,13 @@ use UserBundle\Entity\User;
  * EventParticipation
  *
  * @ORM\Table(name="vs_event_participation", uniqueConstraints={@ORM\UniqueConstraint(name="participation", columns={"eventId", "userId"})})
- * @ORM\Entity(repositoryClass="UserBundle\Repository\Event\EventParticipationRepository")
+ * @ORM\Entity(repositoryClass="CoreBundle\Repository\Event\EventParticipationRepository")
  */
 class EventParticipation
 {
 
     /** @var string */
-    const REPOSITORY = 'CoreBundle:EventParticipation';
+    const REPOSITORY = 'CoreBundle:Event\EventParticipation';
 
     /**
      * @var int

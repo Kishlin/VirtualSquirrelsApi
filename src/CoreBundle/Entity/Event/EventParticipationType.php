@@ -16,13 +16,13 @@ use Doctrine\ORM\Mapping as ORM;
  * EventParticipationType
  *
  * @ORM\Table(name="vs_event_participation_type")
- * @ORM\Entity(repositoryClass="UserBundle\Repository\Event\EventParticipationTypeRepository")
+ * @ORM\Entity(repositoryClass="CoreBundle\Repository\Event\EventParticipationTypeRepository")
  */
 class EventParticipationType
 {
 
     /** @var string */
-    const REPOSITORY = 'CoreBundle:EventParticipationType';
+    const REPOSITORY = 'CoreBundle:Event\EventParticipationType';
 
     /**
      * @var int

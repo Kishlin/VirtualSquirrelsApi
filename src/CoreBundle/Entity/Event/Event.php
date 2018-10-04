@@ -20,7 +20,7 @@ class Event
 {
 
     /** @var string */
-    const REPOSITORY = 'CoreBundle:Event';
+    const REPOSITORY = 'CoreBundle:Event\Event';
 
     /**
      * @var int

@@ -39,6 +39,7 @@ security:
                 path:     /
 
     access_control:
+        - { path: ^/event, role: ROLE_TRIAL }
         - { path: ^security/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^security/registration/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
 #        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }

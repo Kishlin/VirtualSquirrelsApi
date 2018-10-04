@@ -17,10 +17,23 @@ TO DO
 -----
 
 #### Road map to first release:
-- User: accounts management.
-- Events: calendar events with subscriptions, and admin/officer edit.
-- Applications: votes and discussion feed for members, with and without the applicant.
-- Notifications: notification system.
+
+* User
+- Change password / email / details.
+- Officers can promote/demote roles.
+- Password reset.
+
+* Events
+Officers can force participation.
+Event creation / edition / deletion.
+
+* Notifications
+Notification sender API-wise.
+Send notifications when need be.
+
+* Applications
+Not started yet. Everything is left to do.
+Votes and discussion feed for members. With and without the applicant.
 
 Installation & Usage
 --------------------

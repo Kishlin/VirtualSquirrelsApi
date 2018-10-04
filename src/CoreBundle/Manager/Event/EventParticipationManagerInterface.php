@@ -9,6 +9,7 @@ namespace CoreBundle\Manager\Event;
 
 
 use CoreBundle\Entity\Event\Event;
+use CoreBundle\Entity\Event\EventParticipation;
 use UserBundle\Entity\User;
 
 /**
@@ -24,6 +25,12 @@ interface EventParticipationManagerInterface
      * @param int   $type
      * @return Event
      */
-    function addParticipationForType(Event $event, User $user, int $type): Event;
+    function addParticipationForType(Event $event, User $user, int $type): EventParticipation;
+
+    /**
+     * @param Event $event
+     * @param User  $user
+     */
+    function removeIfExists(Event $event, User $user): void;
 
 }

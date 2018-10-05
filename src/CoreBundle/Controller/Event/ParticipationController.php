@@ -10,17 +10,14 @@ namespace CoreBundle\Controller\Event;
 
 use CoreBundle\CoreEvents;
 use CoreBundle\Entity\Event\Event;
-use CoreBundle\Event\Event\AddParticipationFinalizeEvent;
 use CoreBundle\Event\Event\AddParticipationInitializeEvent;
 use CoreBundle\Event\Event\EventFinalizeEvent;
-use CoreBundle\Event\Event\RemoveParticipationFinalizeEvent;
 use CoreBundle\Event\Event\RemoveParticipationInitializeEvent;
 use CoreBundle\Manager\Event\EventParticipationManagerInterface;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-
 
 /**
  * @package CoreBundle\Controller\Event

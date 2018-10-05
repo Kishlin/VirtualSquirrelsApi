@@ -33,7 +33,7 @@ class EventAnswerListView
      * @JMS\Expose
      * @JMS\Groups({"default"})
      */
-    protected $unsure;
+    protected $negative;
 
     /**
      * @var EventAnswerView[]
@@ -41,7 +41,7 @@ class EventAnswerListView
      * @JMS\Expose
      * @JMS\Groups({"default"})
      */
-    protected $negative;
+    protected $unsure;
 
     /**
      * @var EventAnswerView[]
@@ -53,11 +53,11 @@ class EventAnswerListView
 
     /**
      * @param EventAnswerView[] $positive
-     * @param EventAnswerView[] $unsure
      * @param EventAnswerView[] $negative
+     * @param EventAnswerView[] $unsure
      * @param EventAnswerView[] $backup
      */
-    public function __construct(array $positive, array $unsure, array $negative, array $backup)
+    public function __construct(array $positive, array $negative, array $unsure, array $backup)
     {
         $this->positive = $positive;
         $this->unsure   = $unsure;

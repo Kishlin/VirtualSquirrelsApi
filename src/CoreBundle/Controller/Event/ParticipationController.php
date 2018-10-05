@@ -12,6 +12,7 @@ use CoreBundle\CoreEvents;
 use CoreBundle\Entity\Event\Event;
 use CoreBundle\Event\Event\AddParticipationFinalizeEvent;
 use CoreBundle\Event\Event\AddParticipationInitializeEvent;
+use CoreBundle\Event\Event\EventFinalizeEvent;
 use CoreBundle\Event\Event\RemoveParticipationFinalizeEvent;
 use CoreBundle\Event\Event\RemoveParticipationInitializeEvent;
 use CoreBundle\Manager\Event\EventParticipationManagerInterface;
@@ -59,10 +60,10 @@ class ParticipationController extends FOSRestController
         $initializeEvent = new AddParticipationInitializeEvent($user, $event, $type);
         $this->dispatcher->dispatch(CoreEvents::EVENT_ADD_PARTICIPATION_INITIALIZE, $initializeEvent);
 
-        $eventParticipation = $this->eventParticipationManager->addParticipationForType($event, $user, $type);
+        $this->eventParticipationManager->addParticipationForType($event, $user, $type);
 
-        $finalizeEvent = new AddParticipationFinalizeEvent($eventParticipation);
-        $this->dispatcher->dispatch(CoreEvents::EVENT_ADD_PARTICIPATION_FINALIZE, $finalizeEvent);
+        $finalizeEvent = new EventFinalizeEvent($event, $user);
+        $this->dispatcher->dispatch(CoreEvents::EVENT_FINALIZE_EVENT, $finalizeEvent);
 
         if (null !== $response = $finalizeEvent->getResponse())
             return $response;
@@ -85,11 +86,11 @@ class ParticipationController extends FOSRestController
 
         $this->eventParticipationManager->removeIfExists($event, $user);
 
-        $finalizeEvent = new RemoveParticipationFinalizeEvent($user, $event);
-        $this->dispatcher->dispatch(CoreEvents::EVENT_REMOVE_PARTICIPATION_FINALIZE, $finalizeEvent);
-
-        if (null !== $response = $finalizeEvent->getResponse())
-            return $response;
+//        $finalizeEvent = new ParticipationFinalizeEvent($user, $event);
+//        $this->dispatcher->dispatch(CoreEvents::EVENT_REMOVE_PARTICIPATION_FINALIZE, $finalizeEvent);
+//
+//        if (null !== $response = $finalizeEvent->getResponse())
+//            return $response;
 
         return new Response();
     }

@@ -20,6 +20,14 @@ use Doctrine\Common\Persistence\ObjectManager;
 class EventParticipationTypeFixtures extends Fixture
 {
 
+    /** @var array */
+    CONST REFERENCES = array(
+        EventParticipationTypeEnum::TYPE_POSITIVE => 'reference-positive',
+        EventParticipationTypeEnum::TYPE_NEGATIVE => 'reference-negative',
+        EventParticipationTypeEnum::TYPE_UNSURE   => 'reference-unsure',
+        EventParticipationTypeEnum::TYPE_BACKUP   => 'reference-backup',
+    );
+
     /**
      * @param ObjectManager $manager
      */
@@ -28,6 +36,8 @@ class EventParticipationTypeFixtures extends Fixture
         foreach (EventParticipationTypeEnum::getPossibleTypes() as $type) {
             $eventParticipationType = new EventParticipationType();
             $eventParticipationType->setType($type);
+
+            $this->setReference(self::REFERENCES[$type], $eventParticipationType);
 
             $manager->persist($eventParticipationType);
         }

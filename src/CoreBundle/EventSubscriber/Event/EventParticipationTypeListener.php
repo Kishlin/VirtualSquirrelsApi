@@ -10,7 +10,7 @@ namespace CoreBundle\EventSubscriber\Event;
 
 use CoreBundle\CoreEvents;
 use CoreBundle\Enum\EventParticipationTypeEnum;
-use CoreBundle\Event\Event\HasEventParticipationInterface;
+use CoreBundle\Event\Event\HasEventParticipationTypeInterface;
 use CoreBundle\Exception\BadRequestException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -48,10 +48,10 @@ class EventParticipationTypeListener implements EventSubscriberInterface
     }
 
     /**
-     * @param HasEventParticipationInterface $dispatcherEvent
+     * @param HasEventParticipationTypeInterface $dispatcherEvent
      * @throws BadRequestException
      */
-    public function checkTypeConsistency(HasEventParticipationInterface $dispatcherEvent)
+    public function checkTypeConsistency(HasEventParticipationTypeInterface $dispatcherEvent)
     {
         $type = $dispatcherEvent->getType();
 

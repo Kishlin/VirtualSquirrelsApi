@@ -46,8 +46,7 @@ class FinalizeEventListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            CoreEvents::EVENT_ADD_PARTICIPATION_FINALIZE    => 'setResponse',
-            CoreEvents::EVENT_REMOVE_PARTICIPATION_FINALIZE => 'setResponse'
+            CoreEvents::EVENT_FINALIZE_EVENT => 'setResponse'
         );
     }
 

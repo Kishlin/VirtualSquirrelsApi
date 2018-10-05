@@ -9,13 +9,13 @@ namespace CoreBundle\Tests\Functional\Event\Participation;
 
 
 use CoreBundle\Entity\Event\Event;
+use CoreBundle\Entity\Event\EventParticipation;
 use CoreBundle\Enum\EventParticipationTypeEnum;
 use CoreBundle\Fixtures\ORM\Event\EventSingletonFixtures;
 use CoreBundle\Tests\Functional\Util\WebTestCase;
 use UserBundle\Entity\User;
 use UserBundle\Fixtures\ORM\UserSingletonFixtures;
 use UserBundle\Fixtures\ORM\UserTrialFixtures;
-
 
 /**
  * @package CoreBundle\Tests\Functional\Event\Participation
@@ -90,9 +90,11 @@ class AddParticipationTest extends WebTestCase
     }
 
     /**
+     * @dataProvider validProvider
+     * @param int $type
      * @throws \Exception
      */
-    public function testValidRequest()
+    public function testValidRequest(int $type)
     {
         $fixtures = $this->loadFixtures(array(EventSingletonFixtures::class, UserTrialFixtures::class))->getReferenceRepository();
         $event    = $fixtures->getReference(EventSingletonFixtures::EVENT_REFERENCE); /** @var Event $event */
@@ -101,39 +103,32 @@ class AddParticipationTest extends WebTestCase
         $this->loginAs($user, 'main');
 
         $client = $this->makeClient();
-        $client->request('POST', $this->getUri($event->getId(), EventParticipationTypeEnum::TYPE_POSITIVE));
+        $client->request('POST', $this->getUri($event->getId(), $type));
 
         $this->assertJsonResponse($client);
         $this->assertStatusCode(200, $client);
 
-        $response = json_decode($client->getResponse()->getContent(), true);
+        $eventParticipationList = $this->getRepository(EventParticipation::REPOSITORY)->findAll();
 
-        $this->assertArrayHasKey('id',        $response);
-        $this->assertArrayHasKey('name',      $response);
-        $this->assertArrayHasKey('startDate', $response);
-        $this->assertArrayHasKey('endDate',   $response);
-        $this->assertArrayHasKey('answers',   $response);
+        $this->assertCount(1, $eventParticipationList);
 
-        $this->assertArrayHasKey('positive', $response['answers']);
-        $this->assertArrayHasKey('negative', $response['answers']);
-        $this->assertArrayHasKey('unsure',   $response['answers']);
-        $this->assertArrayHasKey('backup',   $response['answers']);
+        /** @var EventParticipation $eventParticipation */
+        $eventParticipation = $eventParticipationList[0];
 
-        $this->assertEquals($event->getId(),                           $response['id']);
-        $this->assertEquals($event->getName(),                         $response['name']);
-        $this->assertEquals($event->getStartDate()->format(DATE_ATOM), $response['startDate']);
-        $this->assertEquals($event->getEndDate()->format(DATE_ATOM),   $response['endDate']);
+        $this->assertEquals($type, $eventParticipation->getEventParticipationType()->getType());
+        $this->assertEquals($user,  $eventParticipation->getParticipant());
+        $this->assertEquals($event, $eventParticipation->getEvent());
+    }
 
-        $this->assertArrayHasKey($user->getId(), $response['answers']['positive']);
-
-        $this->assertArrayHasKey('id', $response['answers']['positive'][$user->getId()]);
-
-        $this->assertEquals($user->getId(), $response['answers']['positive'][$user->getId()]['id']);
-
-        $this->assertEmpty($response['answers']['negative']);
-        $this->assertEmpty($response['answers']['unsure']);
-        $this->assertEmpty($response['answers']['backup']);
-        $this->assertCount(1, $response['answers']['positive']);
+    /**
+     * @return array
+     */
+    public function validProvider(): array
+    {
+        return array_map(
+            function(int $type) { return array($type); },
+            EventParticipationTypeEnum::getPossibleTypes()
+        );
     }
 
     /**

@@ -26,7 +26,7 @@ Password reset.
 
 * Events
 
-Officers can force participation.
+Event creator can force participation.
 Event creation / edition / deletion.
 
 * Notifications

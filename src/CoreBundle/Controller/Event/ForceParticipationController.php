@@ -10,16 +10,12 @@ namespace CoreBundle\Controller\Event;
 
 use CoreBundle\CoreEvents;
 use CoreBundle\Entity\Event\Event;
-use CoreBundle\Event\Event\AddParticipationInitializeEvent;
-use CoreBundle\Event\Event\EventFinalizeEvent;
 use CoreBundle\Event\Event\ForceParticipationEvent;
-use CoreBundle\Event\Event\RemoveParticipationInitializeEvent;
-use CoreBundle\Manager\Event\EventParticipationManagerInterface;
+use CoreBundle\RequestHandler\Event\EventParticipationHandlerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
 use UserBundle\Entity\User;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * @package CoreBundle\Controller\Event
@@ -28,20 +24,20 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 class ForceParticipationController extends Controller
 {
 
-    /** @var EventParticipationManagerInterface */
-    protected $eventParticipationManager;
-
     /** @var EventDispatcherInterface */
     protected $dispatcher;
 
+    /** @var EventParticipationHandlerInterface */
+    protected $eventParticipationHandler;
+
     /**
-     * @param EventParticipationManagerInterface $eventParticipationManager
      * @param EventDispatcherInterface           $dispatcher
+     * @param EventParticipationHandlerInterface $eventParticipationHandler
      */
-    public function __construct(EventParticipationManagerInterface $eventParticipationManager, EventDispatcherInterface $dispatcher)
+    public function __construct(EventDispatcherInterface $dispatcher, EventParticipationHandlerInterface $eventParticipationHandler)
     {
-        $this->eventParticipationManager = $eventParticipationManager;
-        $this->dispatcher = $dispatcher;
+        $this->dispatcher                = $dispatcher;
+        $this->eventParticipationHandler = $eventParticipationHandler;
     }
 
 
@@ -59,18 +55,7 @@ class ForceParticipationController extends Controller
         $userEvent = new ForceParticipationEvent($this->getUser(), $event);
         $this->dispatcher->dispatch(CoreEvents::EVENT_FORCE_PARTICIPATION, $userEvent);
 
-        $initializeEvent = new AddParticipationInitializeEvent($user, $event, $type);
-        $this->dispatcher->dispatch(CoreEvents::EVENT_ADD_PARTICIPATION_INITIALIZE, $initializeEvent);
-
-        $this->eventParticipationManager->addParticipationForType($event, $user, $type);
-
-        $finalizeEvent = new EventFinalizeEvent($user, $event);
-        $this->dispatcher->dispatch(CoreEvents::EVENT_FINALIZE_EVENT, $finalizeEvent);
-
-        if (null !== $response = $finalizeEvent->getResponse())
-            return $response;
-
-        return new Response();
+        return $this->eventParticipationHandler->add($event, $user, $type);
     }
 
     /**
@@ -86,18 +71,7 @@ class ForceParticipationController extends Controller
         $userEvent = new ForceParticipationEvent($this->getUser(), $event);
         $this->dispatcher->dispatch(CoreEvents::EVENT_FORCE_PARTICIPATION, $userEvent);
 
-        $initializeEvent = new RemoveParticipationInitializeEvent($user, $event);
-        $this->dispatcher->dispatch(CoreEvents::EVENT_REMOVE_PARTICIPATION_INITIALIZE, $initializeEvent);
-
-        $this->eventParticipationManager->removeIfExists($event, $user);
-
-        $finalizeEvent = new EventFinalizeEvent($user, $event);
-        $this->dispatcher->dispatch(CoreEvents::EVENT_FINALIZE_EVENT, $finalizeEvent);
-
-        if (null !== $response = $finalizeEvent->getResponse())
-            return $response;
-
-        return new Response();
+        return $this->eventParticipationHandler->remove($event, $user);
     }
 
 }

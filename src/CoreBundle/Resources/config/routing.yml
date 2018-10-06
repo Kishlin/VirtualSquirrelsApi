@@ -17,3 +17,20 @@ event_participation_remove:
   methods:  [POST]
   requirements:
     eventId: '\d+'
+
+event_participation_force_add:
+  path:    /event/{eventId}/participation/force/{userId}/add/{type}
+  defaults: { _controller: CoreBundle:Event/ForceParticipation:add }
+  methods:  [POST]
+  requirements:
+    eventId: '\d+'
+    userId: '\d+'
+    type: '\d+'
+
+event_participation_force_remove:
+  path:    /event/{eventId}/participation/force/{userId}/remove
+  defaults: { _controller: CoreBundle:Event/ForceParticipation:remove }
+  methods:  [POST]
+  requirements:
+    eventId: '\d+'
+    userId: '\d+'

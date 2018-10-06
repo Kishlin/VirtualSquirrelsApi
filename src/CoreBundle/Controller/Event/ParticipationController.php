@@ -83,11 +83,11 @@ class ParticipationController extends FOSRestController
 
         $this->eventParticipationManager->removeIfExists($event, $user);
 
-//        $finalizeEvent = new ParticipationFinalizeEvent($user, $event);
-//        $this->dispatcher->dispatch(CoreEvents::EVENT_REMOVE_PARTICIPATION_FINALIZE, $finalizeEvent);
-//
-//        if (null !== $response = $finalizeEvent->getResponse())
-//            return $response;
+        $finalizeEvent = new EventFinalizeEvent($event, $user);
+        $this->dispatcher->dispatch(CoreEvents::EVENT_FINALIZE_EVENT, $finalizeEvent);
+
+        if (null !== $response = $finalizeEvent->getResponse())
+            return $response;
 
         return new Response();
     }

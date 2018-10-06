@@ -57,7 +57,7 @@ class FinalizeEventListenerTest extends WebTestCase
         $user->addEventParticipationList($eventParticipation);
         $event->addEventParticipationList($eventParticipation);
 
-        $dispatcherEvent = new EventFinalizeEvent($event, $user);
+        $dispatcherEvent = new EventFinalizeEvent($user, $event);
         $this->getListener()->setResponse($dispatcherEvent);
 
         $response = $dispatcherEvent->getResponse();

@@ -61,7 +61,7 @@ class EventParticipationManager implements EventParticipationManagerInterface
             'type'   => $type,
             'event'  => $event->getId(),
             'user'   => $user->getId(),
-            'method' => 'removeIfExists',
+            'method' => 'addParticipationForType',
             'class'  => self::class
         ));
 

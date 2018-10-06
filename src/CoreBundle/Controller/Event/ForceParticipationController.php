@@ -8,14 +8,15 @@
 namespace CoreBundle\Controller\Event;
 
 
-use CoreBundle\CoreEvents;
-use CoreBundle\Entity\Event\Event;
-use CoreBundle\Event\Event\ForceParticipationEvent;
 use CoreBundle\RequestHandler\Event\EventParticipationHandlerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use CoreBundle\Event\Event\ForceParticipationEvent;
 use Symfony\Component\HttpFoundation\Response;
+use CoreBundle\Entity\Event\Event;
 use UserBundle\Entity\User;
+use CoreBundle\CoreEvents;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * @package CoreBundle\Controller\Event

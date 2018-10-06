@@ -8,10 +8,11 @@
 namespace CoreBundle\Controller\Event;
 
 
-use CoreBundle\Entity\Event\Event;
 use CoreBundle\RequestHandler\Event\EventParticipationHandlerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use CoreBundle\Entity\Event\Event;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * @package CoreBundle\Controller\Event

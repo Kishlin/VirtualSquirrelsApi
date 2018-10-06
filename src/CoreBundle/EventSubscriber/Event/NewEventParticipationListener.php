@@ -9,7 +9,7 @@ namespace CoreBundle\EventSubscriber\Event;
 
 
 use CoreBundle\CoreEvents;
-use CoreBundle\Event\Event\HasEventParticipationTypeInterface;
+use CoreBundle\Event\Event\HasUserAndEventInterface;
 use CoreBundle\Manager\Event\EventParticipationManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -49,9 +49,9 @@ class NewEventParticipationListener implements EventSubscriberInterface
     }
 
     /**
-     * @param HasEventParticipationTypeInterface $dispatcherEvent
+     * @param HasUserAndEventInterface $dispatcherEvent
      */
-    public function removeExistingParticipation(HasEventParticipationTypeInterface $dispatcherEvent)
+    public function removeExistingParticipation(HasUserAndEventInterface $dispatcherEvent)
     {
         $event = $dispatcherEvent->getEvent();
         $user  = $dispatcherEvent->getUser();

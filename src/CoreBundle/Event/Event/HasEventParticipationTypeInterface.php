@@ -8,13 +8,11 @@
 namespace CoreBundle\Event\Event;
 
 
-use UserBundle\Event\UserEventInterface;
-
 /**
  * @package CoreBundle\Event\Event\Model
  * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
-interface HasEventParticipationTypeInterface extends HasEventInterface, UserEventInterface
+interface HasEventParticipationTypeInterface
 {
 
     /**

@@ -15,14 +15,8 @@ use UserBundle\Entity\User;
  * @package CoreBundle\Event\Event
  * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
-class AddParticipationInitializeEvent extends \Symfony\Component\EventDispatcher\Event implements HasEventParticipationTypeInterface
+class AddParticipationInitializeEvent extends BaseUserEvent implements HasEventParticipationTypeInterface
 {
-
-    /** @var User */
-    protected $user;
-
-    /** @var Event */
-    protected $event;
 
     /** @var int */
     protected $type;
@@ -34,26 +28,9 @@ class AddParticipationInitializeEvent extends \Symfony\Component\EventDispatcher
      */
     public function __construct(User $user, Event $event, int $type)
     {
-        $this->user  = $user;
-        $this->event = $event;
+        parent::__construct($user, $event);
+
         $this->type  = $type;
-    }
-    
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUser(): User
-    {
-        return $this->user;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getEvent(): Event
-    {
-        return $this->event;
     }
 
     /**

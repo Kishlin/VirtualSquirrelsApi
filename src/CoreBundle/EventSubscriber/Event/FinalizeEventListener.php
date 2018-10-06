@@ -11,7 +11,7 @@ namespace CoreBundle\EventSubscriber\Event;
 use CoreBundle\CoreEvents;
 use CoreBundle\Entity\Event\EventParticipation;
 use CoreBundle\Enum\EventParticipationTypeEnum;
-use CoreBundle\Event\Event\HasResponseInterface;
+use CoreBundle\Event\Event\EventFinalizeEvent;
 use CoreBundle\View\Event\EventAnswerListView;
 use CoreBundle\View\Event\EventAnswerView;
 use CoreBundle\View\Event\EventView;
@@ -20,6 +20,10 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @package CoreBundle\EventSubscriber\Event
+ * @author  Pierre-Louis Legrand <hello@pierrelouislegrand.fr>
+ */
 class FinalizeEventListener implements EventSubscriberInterface
 {
 
@@ -51,9 +55,9 @@ class FinalizeEventListener implements EventSubscriberInterface
     }
 
     /**
-     * @param HasResponseInterface $dispatcherEvent
+     * @param EventFinalizeEvent $dispatcherEvent
      */
-    public function setResponse(HasResponseInterface $dispatcherEvent)
+    public function setResponse(EventFinalizeEvent $dispatcherEvent)
     {
         $event = $dispatcherEvent->getEvent();
 

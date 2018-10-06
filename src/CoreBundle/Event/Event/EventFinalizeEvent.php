@@ -8,6 +8,7 @@
 namespace CoreBundle\Event\Event;
 
 
+use CoreBundle\Event\HasResponseInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**

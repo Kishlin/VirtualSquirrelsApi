@@ -53,7 +53,7 @@ class ForceParticipationController extends Controller
      */
     public function addAction(Event $event, User $user, int $type): Response
     {
-        $userEvent = new ForceParticipationEvent($this->getUser(), $event);
+        $userEvent = new ForceParticipationEvent($this->getUser(), $user, $event);
         $this->dispatcher->dispatch(CoreEvents::EVENT_FORCE_PARTICIPATION, $userEvent);
 
         return $this->eventParticipationHandler->add($event, $user, $type);
@@ -69,7 +69,7 @@ class ForceParticipationController extends Controller
      */
     public function removeAction(Event $event, User $user): Response
     {
-        $userEvent = new ForceParticipationEvent($this->getUser(), $event);
+        $userEvent = new ForceParticipationEvent($this->getUser(), $user, $event);
         $this->dispatcher->dispatch(CoreEvents::EVENT_FORCE_PARTICIPATION, $userEvent);
 
         return $this->eventParticipationHandler->remove($event, $user);

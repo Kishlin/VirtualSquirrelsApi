@@ -9,9 +9,10 @@ namespace CoreBundle\EventSubscriber\Event;
 
 
 use CoreBundle\CoreEvents;
-use CoreBundle\Event\Event\HasUserAndEventInterface;
+use CoreBundle\Event\Event\ForceParticipationEvent;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use UserBundle\UserRoles;
 
@@ -45,22 +46,33 @@ class ForceParticipationListener implements EventSubscriberInterface
 
     /**
      * The user given in the event is the one requesting the forced participation, not the user targeted for the participation.
-     * @param HasUserAndEventInterface $dispatcherEvent
+     * @param ForceParticipationEvent $dispatcherEvent
      */
-    public function onForceParticipation(HasUserAndEventInterface $dispatcherEvent)
+    public function onForceParticipation(ForceParticipationEvent $dispatcherEvent)
     {
-        $event = $dispatcherEvent->getEvent();
-        $user  = $dispatcherEvent->getUser();
+        // TODO Event creator should be able to force participations on his event, even without officer role.
 
-        $this->logger->debug('Removing event participation if exists.', array(
-            'user'   => $user->getId(),
-            'event'  => $event->getId(),
-            'method' => 'removeExistingParticipation',
-            'class'  => self::class
-        ));
+        $requestingUser = $dispatcherEvent->getRequestingUser();
+        if (!$requestingUser->hasRole(UserRoles::ROLE_OFFICER)) {
+            $this->logger->debug('Requesting user does not have role.', array(
+                'user'   => $requestingUser->getId(),
+                'method' => 'onForceParticipation',
+                'class'  => self::class
+            ));
 
-        if (!$user->hasRole(UserRoles::ROLE_OFFICER))
             throw new AccessDeniedException('You are not allowed to force participations for this event.');
+        }
+
+        $user  = $dispatcherEvent->getUser();
+        if (!$user->hasRole(UserRoles::ROLE_TRIAL)) {
+            $this->logger->debug('Trying to force participation on user which cannot take part in events..', array(
+                'user'   => $requestingUser->getId(),
+                'method' => 'onForceParticipation',
+                'class'  => self::class
+            ));
+
+            throw new BadRequestHttpException('The user is not allowed to take part in event.');
+        }
     }
 
 }

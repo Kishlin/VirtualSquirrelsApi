@@ -28,7 +28,7 @@ class UserTrialFixtures extends UserFixtures
      */
     public function load(ObjectManager $manager): void
     {
-        $user = $this->factory->createUser('user');
+        $user = $this->factory->createUser('trial');
 
         $user->addRole(UserRoles::ROLE_TRIAL);
 

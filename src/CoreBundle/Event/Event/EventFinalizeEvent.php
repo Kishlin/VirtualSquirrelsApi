@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
  * @package CoreBundle\Event\Event
  * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
-class EventFinalizeEvent extends BaseUserEvent
+class EventFinalizeEvent extends BaseUserEvent implements HasResponseInterface
 {
 
     /** @var Response */

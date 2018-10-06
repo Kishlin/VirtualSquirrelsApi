@@ -14,7 +14,7 @@ use CoreBundle\Event\Event\AddParticipationInitializeEvent;
 use CoreBundle\Event\Event\EventFinalizeEvent;
 use CoreBundle\Event\Event\RemoveParticipationInitializeEvent;
 use CoreBundle\Manager\Event\EventParticipationManagerInterface;
-use FOS\RestBundle\Controller\FOSRestController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -23,7 +23,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
  * @package CoreBundle\Controller\Event
  * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
-class ParticipationController extends FOSRestController
+class ParticipationController extends Controller
 {
 
     /** @var EventParticipationManagerInterface */
@@ -59,7 +59,7 @@ class ParticipationController extends FOSRestController
 
         $this->eventParticipationManager->addParticipationForType($event, $user, $type);
 
-        $finalizeEvent = new EventFinalizeEvent($event, $user);
+        $finalizeEvent = new EventFinalizeEvent($user, $event);
         $this->dispatcher->dispatch(CoreEvents::EVENT_FINALIZE_EVENT, $finalizeEvent);
 
         if (null !== $response = $finalizeEvent->getResponse())
@@ -83,7 +83,7 @@ class ParticipationController extends FOSRestController
 
         $this->eventParticipationManager->removeIfExists($event, $user);
 
-        $finalizeEvent = new EventFinalizeEvent($event, $user);
+        $finalizeEvent = new EventFinalizeEvent($user, $event);
         $this->dispatcher->dispatch(CoreEvents::EVENT_FINALIZE_EVENT, $finalizeEvent);
 
         if (null !== $response = $finalizeEvent->getResponse())

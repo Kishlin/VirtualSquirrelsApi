@@ -70,14 +70,13 @@ class ExceptionResponseBuilder implements ExceptionResponseBuilderInterface
      */
     protected function getStatusCode(\Exception $e): int
     {
-        switch (get_class($e)) {
-            case AccessDeniedException::class:
-                return 403;
-            case NotFoundHttpException::class:
-                return 404;
-            default:
-                return 500;
-        }
+        if ($e instanceof AccessDeniedException)
+            return 403;
+
+        if ($e instanceof NotFoundHttpException)
+            return 404;
+
+        return 500;
     }
 
 }

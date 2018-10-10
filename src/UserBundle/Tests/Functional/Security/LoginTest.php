@@ -46,9 +46,9 @@ class LoginTest extends WebTestCase
     public function errorProvider()
     {
         return array(
-            array(array('_username' => 'user', '_password' => 'changeme'), 'Bad credentials.', array()),
-            array(array('_username' => 'user', '_password' => 'wrongPassword'), 'Bad credentials.', array(UserSingletonFixtures::class)),
-            array(array('_username' => 'user', '_password' => 'changeme'), 'User account is disabled.', array(DisabledUserFixtures::class)),
+            array(array('_username' => 'user',     '_password' => 'changeme'),      'Bad credentials.',          array()),
+            array(array('_username' => 'user',     '_password' => 'wrongPassword'), 'Bad credentials.',          array(UserSingletonFixtures::class)),
+            array(array('_username' => 'disabled', '_password' => 'changeme'),      'User account is disabled.', array(DisabledUserFixtures::class)),
         );
     }
 

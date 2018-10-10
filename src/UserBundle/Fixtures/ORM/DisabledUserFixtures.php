@@ -24,6 +24,8 @@ class DisabledUserFixtures extends UserFixtures
     {
         $user = $this->factory->createUser('disabled');
 
+        $user->setEnabled(false);
+
         $manager->persist($user);
         $manager->flush();
     }

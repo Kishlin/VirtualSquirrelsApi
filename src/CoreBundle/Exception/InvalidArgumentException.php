@@ -21,7 +21,7 @@ class InvalidArgumentException extends \InvalidArgumentException
     /**
      * @param string $message
      */
-    public function __construct(string $message = '')
+    public function __construct(string $message = 'Invalid argument provided.')
     {
         parent::__construct($message, CoreException::INVALID_ARGUMENT_EXCEPTION, null);
     }

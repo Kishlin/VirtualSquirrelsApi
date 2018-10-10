@@ -21,7 +21,7 @@ class BadRequestException extends \Exception
     /**
      * @param string $message
      */
-    public function __construct(string $message)
+    public function __construct(string $message = 'Bad request.')
     {
         parent::__construct($message, CoreException::BAD_REQUEST_EXCEPTION, null);
     }

@@ -23,8 +23,11 @@ final class CoreException
     /** @var int */
     const INVALID_ARGUMENT_EXCEPTION = 100;
 
-    /** @var int  */
+    /** @var int */
     const BAD_REQUEST_EXCEPTION = 200;
+
+    /** @var int */
+    const LOGIC_EXCEPTION = 300;
 
 
     /** @var string */

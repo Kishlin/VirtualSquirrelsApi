@@ -5,7 +5,7 @@
  * Time: 11:12
  */
 
-namespace UserBundle\Tests\Security\Registration;
+namespace UserBundle\Tests\Functional\Security\Registration;
 
 
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -26,8 +26,10 @@ use UserBundle\Tests\Functional\Util\WebTestCase;
 class RegisterTest extends WebTestCase
 {
 
+    /** @var array */
     const MATCHING_PASSWORD = array('first' => 'changeme', 'second' => 'changeme');
 
+    /** @var array */
     const INVALID_PASSWORD  = array('first' => 'changeme', 'second' => 'changeme2');
 
     /**

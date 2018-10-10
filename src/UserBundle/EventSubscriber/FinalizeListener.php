@@ -34,7 +34,7 @@ class FinalizeListener implements EventSubscriberInterface
      */
     public function __construct(LoggerInterface $logger, SerializerInterface $serializer)
     {
-        $this->logger = $logger;
+        $this->logger     = $logger;
         $this->serializer = $serializer;
     }
 
@@ -55,6 +55,12 @@ class FinalizeListener implements EventSubscriberInterface
     public function setResponse(GetResponseUserEvent $event)
     {
         $user = $event->getUser();
+
+        $this->logger->info('Serializing user before setting event response.', array(
+            'user'   => $user->getId(),
+            'method' => 'setResponse',
+            'class'  => self::class
+        ));
 
         $response = new Response($this->serializer->serialize($user, 'json'), 200);
 

@@ -42,4 +42,4 @@ security:
         - { path: ^security/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^security/registration/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^security/profile, role: IS_AUTHENTICATED_REMEMBERED }
-#        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^security/users, role: ROLE_OFFICER, allow_if: "!is_anonymous() and is_authenticated()" }

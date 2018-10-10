@@ -9,10 +9,10 @@ namespace UserBundle\Manager;
 
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use UserBundle\Entity\User;
 use UserBundle\Repository\UserRepository;
-
 
 /**
  * @package UserBundle\Manager
@@ -21,23 +21,64 @@ use UserBundle\Repository\UserRepository;
 class UserManager implements UserManagerInterface
 {
 
-    /** @var UserRepository */
-    protected $repository;
+    /** @var LoggerInterface */
+    protected $logger;
+
+    /** @var ObjectManager */
+    protected $objectManager;
 
     /** @var TokenStorageInterface */
     protected $tokenStorage;
 
     /**
+     * @param LoggerInterface       $logger
      * @param ObjectManager         $objectManager
      * @param TokenStorageInterface $tokenStorage
      */
-    public function __construct(ObjectManager $objectManager, TokenStorageInterface $tokenStorage)
+    public function __construct(LoggerInterface $logger, ObjectManager $objectManager, TokenStorageInterface $tokenStorage)
     {
-        $this->tokenStorage = $tokenStorage;
-
-        $this->repository   = $objectManager->getRepository(User::REPOSITORY);
+        $this->logger        = $logger;
+        $this->objectManager = $objectManager;
+        $this->tokenStorage  = $tokenStorage;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function promote(User $user, string $role): User
+    {
+        if (!$user->hasRole($role)) {
+            $user->addRole($role);
+
+            $this->logger->info('Promoting user.', array(
+                'user' => $user->getId(),
+                'role' => $role,
+                'method' => 'promote',
+                'class' => self::class
+            ));
+        }
+
+        return $this->flushAndReturnUser($user);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function demote(User $user, string $role): User
+    {
+        if ($user->hasRole($role)) {
+            $user->removeRole($role);
+
+            $this->logger->info('Demoting user.', array(
+                'user' => $user->getId(),
+                'role' => $role,
+                'method' => 'promote',
+                'class' => self::class
+            ));
+        }
+
+        return $this->flushAndReturnUser($user);
+    }
 
     /**
      * {@inheritdoc}
@@ -46,11 +87,32 @@ class UserManager implements UserManagerInterface
     {
         $excluded = null;
 
-        if (!$withCurrent)
+        if (!$withCurrent) {
             /** @var User $excluded */
             $excluded = $this->tokenStorage->getToken()->getUser();
+        }
 
-        return $this->repository->findByRole($role, $excluded);
+        /** @var UserRepository $repository */
+        $repository = $this->objectManager->getRepository(User::REPOSITORY);
+        return $repository->findByRole($role, $excluded);
+    }
+
+    /**
+     * @param User $user
+     * @return User
+     */
+    protected function flushAndReturnUser(User $user): User
+    {
+        $objectManager = $this->objectManager;
+
+        if (!$objectManager->contains($user))
+            $objectManager->persist($user);
+
+        $objectManager->flush();
+
+        $objectManager->refresh($user);
+
+        return $user;
     }
 
 }

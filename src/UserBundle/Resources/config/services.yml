@@ -12,6 +12,18 @@ services:
     tags: ['controller.service_arguments']
     public: true
 
+  UserBundle\Controller\AccessControlController:
+    class: 'UserBundle\Controller\AccessControlController'
+    arguments:
+      $userManager: '@UserBundle\Manager\UserManagerInterface'
+      $eventDispatcher: '@event_dispatcher'
+    calls:
+      - method: setContainer
+        arguments:
+          - '@service_container'
+    tags: ['controller.service_arguments']
+    public: true
+
   UserBundle\Handler\Security\AuthenticationFailure:
     class: 'UserBundle\Handler\Security\AuthenticationFailure'
     arguments:

@@ -21,4 +21,10 @@ final class UserEvents
     /** @var string */
     const PROFILE_FORM_FAILURE_EVENT = 'profile.form.failure.event';
 
+    /** @var string */
+    const USER_CHANGED_FINALIZE = 'user.changed.finalize';
+
+    /** @var string */
+    const ROLE_EDIT_EVENT = 'role.edit.event';
+
 }

@@ -16,11 +16,11 @@ use UserBundle\UserRoles;
  * @package UserBundle\Fixtures\ORM
  * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
-class UserTrialFixtures extends UserFixtures
+class UserMemberFixtures extends UserFixtures
 {
 
     /** @var string */
-    const REFERENCE = 'user-trial';
+    const REFERENCE = 'user-officer';
 
 
     /**
@@ -28,9 +28,10 @@ class UserTrialFixtures extends UserFixtures
      */
     public function load(ObjectManager $manager): void
     {
-        $user = $this->factory->createUser('trial');
+        $user = $this->factory->createUser('member');
 
         $user->addRole(UserRoles::ROLE_TRIAL);
+        $user->addRole(UserRoles::ROLE_MEMBER);
 
         $manager->persist($user);
         $manager->flush();

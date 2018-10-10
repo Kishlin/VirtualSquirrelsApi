@@ -104,13 +104,13 @@ class RegisterTest extends WebTestCase
         $invalid  = self::INVALID_PASSWORD;
 
         return array(
-            array(array('email' => 'example2@gmail.com', 'username' => 'user2'), 'password', FailureListener::ERRORS[NotBlank::class]),
-            array(array('email' => 'example2@gmail.com', 'plainPassword' => $matching), 'username', FailureListener::ERRORS[NotBlank::class]),
+            array(array('email' => 'user2@gmail.com', 'username' => 'user2'), 'password', FailureListener::ERRORS[NotBlank::class]),
+            array(array('email' => 'user2@gmail.com', 'plainPassword' => $matching), 'username', FailureListener::ERRORS[NotBlank::class]),
             array(array('username' => 'user2', 'plainPassword' => $matching), 'email', FailureListener::ERRORS[NotBlank::class]),
-            array(array('email' => 'example2@gmail.com', 'username' => 'user2', 'plainPassword' => $invalid), 'password', FailureListener::ERRORS[Form::class]),
+            array(array('email' => 'user2@gmail.com', 'username' => 'user2', 'plainPassword' => $invalid), 'password', FailureListener::ERRORS[Form::class]),
             array(array('email' => 'notAValidEmail', 'username' => 'user2', 'plainPassword' => $matching), 'email', FailureListener::ERRORS[Email::class]),
-            array(array('email' => 'example2@gmail.com', 'username' => 'user', 'plainPassword' => $matching), 'username', FailureListener::ERRORS[UniqueEntity::class]),
-            array(array('email' => 'example@gmail.com', 'username' => 'user2', 'plainPassword' => $matching), 'email', FailureListener::ERRORS[UniqueEntity::class])
+            array(array('email' => 'user2@gmail.com', 'username' => 'user', 'plainPassword' => $matching), 'username', FailureListener::ERRORS[UniqueEntity::class]),
+            array(array('email' => 'user@gmail.com', 'username' => 'user2', 'plainPassword' => $matching), 'email', FailureListener::ERRORS[UniqueEntity::class])
         );
     }
 

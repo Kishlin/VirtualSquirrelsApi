@@ -8,56 +8,15 @@
 namespace UserBundle\EventSubscriber\Registration;
 
 
-use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\FOSUserEvents;
-use Psr\Log\LoggerInterface;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Form\Extension\Validator\Constraints\Form;
-use Symfony\Component\Form\FormError;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Validator\Constraints\Email;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\ConstraintViolation;
+use UserBundle\EventSubscriber\FormFailureListener;
 
 /**
  * @package UserBundle\EventSubscriber\Registration
  * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
-class FailureListener implements EventSubscriberInterface
+class FailureListener extends FormFailureListener
 {
-
-    /** @var string */
-    const ERROR_MESSAGE = 'Form failure.';
-
-    /** @var array */
-    const FIELDS = array(
-        'data.username'           => 'username',
-        'data.email'              => 'email',
-        'data.plainPassword'      => 'password',
-        'children[plainPassword]' => 'password'
-    );
-
-    /** @var array */
-    const ERRORS = array(
-        UniqueEntity::class => 'taken',
-        NotBlank::class     => 'blank',
-        Form::class         => 'unequal',
-        Email::class        => 'format'
-    );
-
-
-    /** @var LoggerInterface */
-    protected $logger;
-
-    /**
-     * @param LoggerInterface $logger
-     */
-    public function __construct(LoggerInterface $logger)
-    {
-        $this->logger = $logger;
-    }
-
 
     /**
      * {@inheritDoc}
@@ -68,28 +27,16 @@ class FailureListener implements EventSubscriberInterface
     }
 
     /**
-     * @param FormEvent $event
+     * {@inheritDoc}
      */
-    public function onFailure(FormEvent $event): void
+    protected function getPropertyKeyArray(): array
     {
-        $data = array('message' => self::ERROR_MESSAGE);
-        $errors = $event->getForm()->getErrors(true);
-
-        foreach ($errors as $key => $formError) { /** @var FormError $formError */
-
-            $cause = $formError->getCause(); /** @var ConstraintViolation $cause */
-            $key   = self::FIELDS[$cause->getPropertyPath()];
-            $type = self::ERRORS[get_class($cause->getConstraint())];
-
-            $this->logger->debug(
-                self::ERROR_MESSAGE,
-                array('errorKey' => $key, 'errorType' => $type, 'method' => 'onFailure', 'class' => self::class)
-            );
-
-            $data['errors'][$key] = $type;
-        }
-
-        $event->setResponse(new JsonResponse($data, 400));
+        return array(
+            'data.username'           => 'username',
+            'data.email'              => 'email',
+            'data.plainPassword'      => 'password',
+            'children[plainPassword]' => 'password'
+        );
     }
 
 }

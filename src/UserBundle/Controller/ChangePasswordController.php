@@ -95,6 +95,14 @@ class ChangePasswordController extends Controller
             $completedEvent = new FilterUserResponseEvent($user, $request, $response);
             $this->eventDispatcher->dispatch(FOSUserEvents::CHANGE_PASSWORD_COMPLETED, $completedEvent);
 
+
+            $finalizeEvent = new GetResponseUserEvent($user, $request);
+            $this->eventDispatcher->dispatch(UserEvents::USER_CHANGED_FINALIZE, $finalizeEvent);
+
+            if (null === $response = $finalizeEvent->getResponse()) {
+                throw new LogicException('Finalize event should have a response.');
+            }
+
             return $response;
         } else {
             $failureEvent = new FormEvent($form, $request);

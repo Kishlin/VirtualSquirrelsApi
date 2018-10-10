@@ -20,23 +20,26 @@ TO DO
 
 * User
 
-Change password / email / details.
-Officers can promote/demote roles.
+Change email / details.
+
 Password reset.
 
 * Events
 
 Event creator can force participation.
+
 Event creation / edition / deletion.
 
 * Notifications
 
 Notification sender API-wise.
+
 Send notifications when need be.
 
 * Applications
 
 Not started yet. Everything is left to do.
+
 Votes and discussion feed for members. With and without the applicant.
 
 Installation & Usage

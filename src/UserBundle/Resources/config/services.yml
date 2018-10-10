@@ -1,4 +1,17 @@
 services:
+  UserBundle\Controller\ChangePasswordController:
+    class: 'UserBundle\Controller\ChangePasswordController'
+    arguments:
+      $eventDispatcher: '@event_dispatcher'
+      $formFactory: '@fos_user.change_password.form.factory'
+      $userManager: '@fos_user.user_manager'
+    calls:
+      - method: setContainer
+        arguments:
+          - '@service_container'
+    tags: ['controller.service_arguments']
+    public: true
+
   UserBundle\Handler\Security\AuthenticationFailure:
     class: 'UserBundle\Handler\Security\AuthenticationFailure'
     arguments:

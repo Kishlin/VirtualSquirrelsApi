@@ -1,29 +1,28 @@
 <?php
 /**
  * User: Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
- * Date: 03/10/2018
- * Time: 18:26
+ * Date: 10/10/2018
+ * Time: 17:36
  */
 
 namespace CoreBundle\Exception;
 
 
-use CoreBundle\CoreException;
-
+use Symfony\Component\Security\Core\Exception\AccessDeniedException as BaseException;
 
 /**
  * @package CoreBundle\Exception
  * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
-class BadRequestException extends \Exception
+class AccessDeniedException extends BaseException
 {
 
     /**
      * @param string $message
      */
-    public function __construct(string $message = 'Bad request.')
+    public function __construct(string $message = 'Access denied.')
     {
-        parent::__construct($message, CoreException::BAD_REQUEST_EXCEPTION, null);
+        parent::__construct($message);
     }
 
 }

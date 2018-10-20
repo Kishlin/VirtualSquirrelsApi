@@ -1,8 +1,8 @@
 <?php
 /**
  * User: Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
- * Date: 03/10/2018
- * Time: 18:26
+ * Date: 10/10/2018
+ * Time: 09:38
  */
 
 namespace CoreBundle\Exception;
@@ -10,20 +10,19 @@ namespace CoreBundle\Exception;
 
 use CoreBundle\CoreException;
 
-
 /**
  * @package CoreBundle\Exception
  * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
-class BadRequestException extends \Exception
+class LogicException extends \LogicException
 {
 
     /**
      * @param string $message
      */
-    public function __construct(string $message = 'Bad request.')
+    public function __construct(string $message = 'Statement should not be reached.')
     {
-        parent::__construct($message, CoreException::BAD_REQUEST_EXCEPTION, null);
+        parent::__construct($message, CoreException::LOGIC_EXCEPTION, null);
     }
 
 }

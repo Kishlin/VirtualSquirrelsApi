@@ -23,7 +23,7 @@ interface EventParticipationManagerInterface
      * @param Event $event
      * @param User  $user
      * @param int   $type
-     * @return Event
+     * @return EventParticipation
      */
     function addParticipationForType(Event $event, User $user, int $type): EventParticipation;
 

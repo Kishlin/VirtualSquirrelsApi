@@ -18,6 +18,9 @@ final class CoreEvents
     private function __construct() { }
 
     /** @var string */
+    const EVENT_FORM_FAILURE = 'form.failure';
+
+    /** @var string */
     const NOTIFICATION_NEW = 'notification.new';
 
 }

@@ -2,3 +2,54 @@ core_whoami:
   path:     /whoami
   defaults: { _controller: CoreBundle:Auth:whoAmI }
   methods:  [GET]
+
+event_create:
+  path: /event/new
+  defaults: { _controller: CoreBundle:Event/Entity:create }
+  methods: [POST]
+
+event_edit:
+  path: /event/{eventId}/edit
+  defaults: { _controller: CoreBundle:Event/Entity:edit }
+  methods: [UPDATE]
+  requirements:
+    eventId: '\d+'
+
+event_remove:
+  path: /event/{eventId}/remove
+  defaults: { _controller: CoreBundle:Event/Entity:remove }
+  methods: [DELETE]
+  requirements:
+    eventId: '\d+'
+
+event_participation_add:
+  path:    /event/{eventId}/participation/add/{type}
+  defaults: { _controller: CoreBundle:Event/Participation:add }
+  methods:  [POST]
+  requirements:
+    eventId: '\d+'
+    type: '\d+'
+
+event_participation_remove:
+  path:    /event/{eventId}/participation/remove
+  defaults: { _controller: CoreBundle:Event/Participation:remove }
+  methods:  [POST]
+  requirements:
+    eventId: '\d+'
+
+event_participation_force_add:
+  path:    /event/{eventId}/participation/force/{userId}/add/{type}
+  defaults: { _controller: CoreBundle:Event/ForceParticipation:add }
+  methods:  [POST]
+  requirements:
+    eventId: '\d+'
+    userId: '\d+'
+    type: '\d+'
+
+event_participation_force_remove:
+  path:    /event/{eventId}/participation/force/{userId}/remove
+  defaults: { _controller: CoreBundle:Event/ForceParticipation:remove }
+  methods:  [POST]
+  requirements:
+    eventId: '\d+'
+    userId: '\d+'

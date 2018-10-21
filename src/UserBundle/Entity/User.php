@@ -8,8 +8,10 @@
 namespace UserBundle\Entity;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\User as BaseUser;
+use CoreBundle\Entity\Event\EventParticipation;
 use CoreBundle\Entity\Notification\NotificationToUser;
 use JMS\Serializer\Annotation as JMS;
 use Doctrine\ORM\Mapping as ORM;
@@ -37,11 +39,12 @@ class User extends BaseUser
      */
     protected $id;
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
+    /**
+     * @var Collection
+     *
+     * @ORM\OneToMany(targetEntity="CoreBundle\Entity\Event\EventParticipation", mappedBy="participant", cascade={"remove"})
+     */
+    private $eventParticipationList;
 
     /**
      * @var Collection
@@ -50,6 +53,45 @@ class User extends BaseUser
      */
     private $notificationToUserList;
 
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->eventParticipationList = new ArrayCollection();
+    }
+
+
+    /**
+     * @param EventParticipation $eventParticipationList
+     *
+     * @return User
+     */
+    public function addEventParticipationList(EventParticipation $eventParticipationList): User
+    {
+        $this->eventParticipationList[] = $eventParticipationList;
+
+        return $this;
+    }
+
+    /**
+     * @param EventParticipation $eventParticipationList
+     *
+     * @return User
+     */
+    public function removeEventParticipationList(EventParticipation $eventParticipationList): User
+    {
+        $this->eventParticipationList->removeElement($eventParticipationList);
+
+        return $this;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEventParticipationList(): Collection
+    {
+        return $this->eventParticipationList;
+    }
 
     /**
      * @param NotificationToUser $notificationToUserList

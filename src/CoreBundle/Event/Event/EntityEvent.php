@@ -3,23 +3,15 @@
  * User: Pierre-Louis Legrand <hello@pierrelouislegrand.fr>
  * Link: https://pierrelouislegrand.fr
  * Date: 10/20/18
- * Time: 3:53 PM
+ * Time: 3:04 PM
  */
 
-namespace CoreBundle;
+namespace CoreBundle\Event\Event;
 
 
 /**
- * @package CoreBundle
+ * @package CoreBundle\Event\Event
  * @author  Pierre-Louis Legrand <hello@pierrelouislegrand.fr>
  * @link    https://pierrelouislegrand.fr
  */
-final class CoreForms
-{
-
-    private function __construct() { }
-
-    /** @var string */
-    const FORM_EVENT = 'form_event';
-
-}
+class EntityEvent extends BaseUserEvent implements HasUserAndEventInterface { }

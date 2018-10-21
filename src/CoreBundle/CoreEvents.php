@@ -24,6 +24,9 @@ final class CoreEvents
     const EVENT_FORM_FAILURE = 'form.failure';
 
     /** @var string */
+    const EVENT_ENTITY_INITIALIZE = 'event.entity.initialize';
+
+    /** @var string */
     const EVENT_FORCE_PARTICIPATION = 'event.force.participation.';
 
     /** @var string */

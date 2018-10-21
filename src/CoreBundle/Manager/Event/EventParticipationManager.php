@@ -52,11 +52,6 @@ class EventParticipationManager implements EventParticipationManagerInterface
         $eventParticipation = $this->creator->createForType($event, $user, $type);
         $event->addEventParticipationList($eventParticipation);
 
-        $this->objectManager->persist($eventParticipation);
-        if (!$this->objectManager->contains($event)) $this->objectManager->persist($event);
-
-        $this->objectManager->flush();
-
         $this->logger->debug('Saving up new participation.', array(
             'type'   => $type,
             'event'  => $event->getId(),
@@ -64,6 +59,9 @@ class EventParticipationManager implements EventParticipationManagerInterface
             'method' => 'addParticipationForType',
             'class'  => self::class
         ));
+
+        $this->objectManager->contains($event) || $this->objectManager->persist($event);
+        $this->objectManager->persist($eventParticipation);
 
         $this->objectManager->flush();
 
@@ -90,6 +88,7 @@ class EventParticipationManager implements EventParticipationManagerInterface
             ));
 
             $this->objectManager->remove($eventParticipation);
+
             $this->objectManager->flush();
         }
     }

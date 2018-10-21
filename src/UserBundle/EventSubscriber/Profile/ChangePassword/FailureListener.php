@@ -5,11 +5,11 @@
  * Time: 5:18 PM
  */
 
-namespace UserBundle\EventSubscriber\Registration;
+namespace UserBundle\EventSubscriber\Profile\ChangePassword;
 
 
-use FOS\UserBundle\FOSUserEvents;
 use UserBundle\EventSubscriber\FormFailureListener;
+use UserBundle\UserEvents;
 
 /**
  * @package UserBundle\EventSubscriber\Registration
@@ -23,7 +23,7 @@ class FailureListener extends FormFailureListener
      */
     public static function getSubscribedEvents(): array
     {
-        return array(FOSUserEvents::REGISTRATION_FAILURE => 'onFailure');
+        return array(UserEvents::PROFILE_FORM_FAILURE_EVENT => 'onFailure');
     }
 
     /**
@@ -32,10 +32,10 @@ class FailureListener extends FormFailureListener
     protected function getPropertyKeyArray(): array
     {
         return array(
-            'data.username'           => 'username',
-            'data.email'              => 'email',
-            'data.plainPassword'      => 'password',
-            'children[plainPassword]' => 'password'
+            'children[current_password].data' => 'password',
+            'data.current_password'   => 'password',
+            'data.plainPassword'      => 'newPassword',
+            'children[plainPassword]' => 'newPassword'
         );
     }
 

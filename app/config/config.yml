@@ -119,3 +119,6 @@ jms_serializer:
         path: "@UserBundle/Resources/config/serializer/fos"
   property_naming:
     id: 'jms_serializer.identical_property_naming_strategy'
+
+user:
+  login_redirect: 'core_loading'

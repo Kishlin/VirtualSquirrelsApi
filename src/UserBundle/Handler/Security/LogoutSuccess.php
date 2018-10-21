@@ -19,12 +19,15 @@ use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
 class LogoutSuccess implements LogoutSuccessHandlerInterface
 {
 
+    /** @var string */
+    const MESSAGE = 'User has logged out.';
+
     /**
      * {@inheritdoc}
      */
-    public function onLogoutSuccess(Request $request)
+    public function onLogoutSuccess(Request $request): JsonResponse
     {
-        return new JsonResponse(array('message' => 'User has logged out.'));
+        return new JsonResponse(array('message' => self::MESSAGE));
     }
 
 }

@@ -1,18 +1,18 @@
 <?php
 /**
- * User: Pierre-Louis Legrand <hello@pierrelouislegrand.fr>
- * Date: 9/22/2018
- * Time: 7:23 PM
+ * User: Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
+ * Date: 08/10/2018
+ * Time: 11:31
  */
 
-namespace UserBundle\EventSubscriber\Registration;
+namespace UserBundle\EventSubscriber\Profile\ChangePassword;
 
 
 use FOS\UserBundle\FOSUserEvents;
 use UserBundle\EventSubscriber\FormPostInitializeListener;
 
 /**
- * @package UserBundle\EventSubscriber\Registration
+ * @package UserBundle\EventSubscriber\Profile\ChangePassword
  * @author  Pierre-Louis Legrand <pierrelouis.legrand@playrion.com>
  */
 class InitializeListener extends FormPostInitializeListener
@@ -24,7 +24,7 @@ class InitializeListener extends FormPostInitializeListener
     public static function getSubscribedEvents()
     {
         return array(
-            FOSUserEvents::REGISTRATION_INITIALIZE => 'onInitialize'
+            FOSUserEvents::CHANGE_PASSWORD_INITIALIZE => 'onInitialize'
         );
     }
 
@@ -34,10 +34,9 @@ class InitializeListener extends FormPostInitializeListener
     protected function getRequirements(): array
     {
         return array(
-            'fos_user_registration_form[email]',
-            'fos_user_registration_form[username]',
-            'fos_user_registration_form[plainPassword][first]',
-            'fos_user_registration_form[plainPassword][second]'
+            'fos_user_change_password_form[current_password]',
+            'fos_user_change_password_form[plainPassword][first]',
+            'fos_user_change_password_form[plainPassword][second]'
         );
     }
 
@@ -46,7 +45,7 @@ class InitializeListener extends FormPostInitializeListener
      */
     protected function getFormName(): string
     {
-        return 'fos_user_registration_form';
+        return 'fos_user_change_password_form';
     }
 
 }

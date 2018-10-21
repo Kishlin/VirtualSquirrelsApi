@@ -20,7 +20,7 @@ class UserMemberFixtures extends UserFixtures
 {
 
     /** @var string */
-    const REFERENCE = 'user-officer';
+    const REFERENCE = 'user-member';
 
 
     /**

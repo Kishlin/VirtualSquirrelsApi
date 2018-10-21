@@ -3,8 +3,9 @@ services:
     class: 'CoreBundle\EventListener\ExceptionListener'
     arguments:
       $exceptionResponseBuilder: '@CoreBundle\Services\HttpFoundation\ExceptionResponseBuilderInterface'
+      $logger: '@logger'
     tags:
-      - { name: kernel.event_listener, event: kernel.exception }
+      - { name: kernel.event_listener, event: kernel.exception, priority: 10 }
 
   CoreBundle\Services\HttpFoundation\ExceptionResponseBuilderInterface:
     class: 'CoreBundle\Services\HttpFoundation\ExceptionResponseBuilder'

@@ -9,6 +9,7 @@ namespace CoreBundle\EventListener;
 
 
 use CoreBundle\Services\HttpFoundation\ExceptionResponseBuilderInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 
 /**
@@ -21,12 +22,17 @@ class ExceptionListener
     /** @var ExceptionResponseBuilderInterface */
     protected $exceptionResponseBuilder;
 
+    /** @var LoggerInterface */
+    protected $logger;
+
     /**
      * @param ExceptionResponseBuilderInterface $exceptionResponseBuilder
+     * @param LoggerInterface                   $logger
      */
-    public function __construct(ExceptionResponseBuilderInterface $exceptionResponseBuilder)
+    public function __construct(ExceptionResponseBuilderInterface $exceptionResponseBuilder, LoggerInterface $logger)
     {
         $this->exceptionResponseBuilder = $exceptionResponseBuilder;
+        $this->logger = $logger;
     }
 
 
@@ -39,6 +45,17 @@ class ExceptionListener
         $response  = $this->exceptionResponseBuilder->build($exception);
 
         $event->setResponse($response);
+
+        while($exception !== null) {
+            $this->logger->error('Exception occurred in kernel.', array(
+                'message' => $exception->getMessage(),
+                'trace'   => $exception->getTraceAsString(),
+                'method'  => 'onKernelException',
+                'class'   => self::class
+            ));
+
+            $exception = $exception->getPrevious();
+        }
     }
 
 }

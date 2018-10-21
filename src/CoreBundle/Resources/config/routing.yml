@@ -3,6 +3,25 @@ core_whoami:
   defaults: { _controller: CoreBundle:Auth:whoAmI }
   methods:  [GET]
 
+event_create:
+  path: /event/new
+  defaults: { _controller: CoreBundle:Event/Entity:create }
+  methods: [POST]
+
+event_edit:
+  path: /event/{eventId}/edit
+  defaults: { _controller: CoreBundle:Event/Entity:edit }
+  methods: [UPDATE]
+  requirements:
+    eventId: '\d+'
+
+event_remove:
+  path: /event/{eventId}/remove
+  defaults: { _controller: CoreBundle:Event/Entity:remove }
+  methods: [DELETE]
+  requirements:
+    eventId: '\d+'
+
 event_participation_add:
   path:    /event/{eventId}/participation/add/{type}
   defaults: { _controller: CoreBundle:Event/Participation:add }

@@ -8,6 +8,7 @@
 namespace CoreBundle\Services\HttpFoundation;
 
 
+use CoreBundle\Exception\BadRequestException;
 use Monolog\Logger;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -70,6 +71,9 @@ class ExceptionResponseBuilder implements ExceptionResponseBuilderInterface
      */
     protected function getStatusCode(\Exception $e): int
     {
+        if ($e instanceof BadRequestException)
+            return 400;
+
         if ($e instanceof AccessDeniedException)
             return 403;
 

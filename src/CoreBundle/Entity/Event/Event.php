@@ -8,6 +8,7 @@
 namespace CoreBundle\Entity\Event;
 
 
+use Symfony\Component\Validator\Constraints as Validation;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -18,6 +19,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Event
 {
+
+    /** @var string */
+    const DATE_FORMAT = 'Y-m-d H:i:s';
+
+    /** @var string */
+    const DATE_FORM_FORMAT = 'yyyy-MM-dd HH:mm:ss';
 
     /** @var string */
     const REPOSITORY = 'CoreBundle:Event\Event';
@@ -35,6 +42,12 @@ class Event
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     *
+     * @Validation\NotBlank()
+     * @Validation\Length(
+     *     min = 3,
+     *     max = 50
+     * )
      */
     private $name;
 
@@ -42,6 +55,12 @@ class Event
      * @var \DateTime
      *
      * @ORM\Column(name="startDate", type="datetime")
+     *
+     * @Validation\NotBlank()
+     * @Validation\DateTime()
+     * @Validation\GreaterThanOrEqual(
+     *     "today"
+     * )
      */
     private $startDate;
 
@@ -49,6 +68,15 @@ class Event
      * @var \DateTime
      *
      * @ORM\Column(name="endDate", type="datetime")
+     *
+     * @Validation\NotBlank()
+     * @Validation\DateTime()
+     * @Validation\GreaterThanOrEqual(
+     *     "today"
+     * )
+     * @Validation\Expression(
+     *     "this.getStartDate() < this.getEndDate()"
+     * )
      */
     private $endDate;
 
@@ -66,9 +94,9 @@ class Event
 
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -86,9 +114,9 @@ class Event
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -106,9 +134,9 @@ class Event
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getStartDate(): \DateTime
+    public function getStartDate(): ?\DateTime
     {
         return $this->startDate;
     }
@@ -126,9 +154,9 @@ class Event
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getEndDate(): \DateTime
+    public function getEndDate(): ?\DateTime
     {
         return $this->endDate;
     }

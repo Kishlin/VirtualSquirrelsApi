@@ -21,6 +21,9 @@ final class CoreEvents
     const API_LOGIN = 'core.api.login';
 
     /** @var string */
+    const EVENT_FORM_FAILURE = 'form.failure';
+
+    /** @var string */
     const EVENT_FORCE_PARTICIPATION = 'event.force.participation.';
 
     /** @var string */

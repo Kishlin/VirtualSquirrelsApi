@@ -1,6 +1,6 @@
 services:
   UserBundle\Controller\ChangePasswordController:
-    class: 'UserBundle\Controller\ChangePasswordController'
+    class: 'App\Controller\ChangePasswordController'
     arguments:
       $eventDispatcher: '@event_dispatcher'
       $formFactory: '@fos_user.change_password.form.factory'
@@ -13,9 +13,9 @@ services:
     public: true
 
   UserBundle\Controller\AccessControlController:
-    class: 'UserBundle\Controller\AccessControlController'
+    class: 'App\Controller\AccessControlController'
     arguments:
-      $userManager: '@UserBundle\Manager\UserManagerInterface'
+      $userManager: '@App\Manager\UserManagerInterface'
       $eventDispatcher: '@event_dispatcher'
     calls:
       - method: setContainer
@@ -25,29 +25,28 @@ services:
     public: true
 
   UserBundle\Handler\Security\AuthenticationFailure:
-    class: 'UserBundle\Handler\Security\AuthenticationFailure'
+    class: 'App\Handler\Security\AuthenticationFailure'
     arguments:
-      $exceptionResponseBuilder: '@CoreBundle\Services\HttpFoundation\ExceptionResponseBuilderInterface'
+      $exceptionResponseBuilder: '@App\Services\HttpFoundation\ExceptionResponseBuilderInterface'
 
   UserBundle\Handler\Security\AuthenticationSuccess:
-    class: 'UserBundle\Handler\Security\AuthenticationSuccess'
+    class: 'App\Handler\Security\AuthenticationSuccess'
     arguments:
       $logger: '@logger'
       $router: '@router'
-#      $loginRedirect: 'loadingcore_loading'
-      $loginRedirect: '%vs_user_bundle.login_redirect%'
+      $loginRedirect: '%login_redirect%'
     tags:
       - { name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin }
 
   UserBundle\Handler\Security\LogoutSuccess:
-    class: 'UserBundle\Handler\Security\LogoutSuccess'
+    class: 'App\Handler\Security\LogoutSuccess'
 
 
   security.custom.authentication.failure:
-    alias: 'UserBundle\Handler\Security\AuthenticationFailure'
+    alias: 'App\Handler\Security\AuthenticationFailure'
 
   security.custom.authentication.success:
-    alias: 'UserBundle\Handler\Security\AuthenticationSuccess'
+    alias: 'App\Handler\Security\AuthenticationSuccess'
 
   security.custom.authentication.logout:
-    alias: 'UserBundle\Handler\Security\LogoutSuccess'
+    alias: 'App\Handler\Security\LogoutSuccess'

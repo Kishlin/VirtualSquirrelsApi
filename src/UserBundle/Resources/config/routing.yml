@@ -1,6 +1,6 @@
 fos_user_change_password:
     path:     /profile/password
-    defaults: { _controller: UserBundle:ChangePassword:changePassword }
+    defaults: { _controller: App:ChangePassword:changePassword }
     methods:  [POST]
 
 #fos_user_profile:
@@ -20,7 +20,7 @@ fos_user_security:
 
 user_role_promote:
     path:   /users/{userId}/promote/{role}
-    defaults: { _controller: UserBundle:AccessControl:promote }
+    defaults: { _controller: App:AccessControl:promote }
     methods: [POST]
     requirements:
       userId: \d+
@@ -28,7 +28,7 @@ user_role_promote:
 
 user_role_demote:
     path:   /users/{userId}/demote/{role}
-    defaults: { _controller: UserBundle:AccessControl:demote }
+    defaults: { _controller: App:AccessControl:demote }
     methods: [POST]
     requirements:
       userId: \d+

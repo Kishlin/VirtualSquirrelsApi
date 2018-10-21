@@ -26,9 +26,15 @@ Password reset.
 
 * Events
 
+Events should have a creator.
+
+Creating an event should auto add a participation.
+
 Event creator can force participation.
 
-Event creation / edition / deletion.
+Event creator can update self events.
+
+Event edition / deletion.
 
 * Notifications
 

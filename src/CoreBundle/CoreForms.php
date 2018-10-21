@@ -19,4 +19,7 @@ final class CoreForms
 
     private function __construct() { }
 
+    /** @var string */
+    const FORM_EVENT = 'form_event';
+
 }

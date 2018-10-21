@@ -37,7 +37,7 @@ class AddParticipationTest extends BaseParticipationTest
         $client = $this->makeClient();
         $client->request('POST', $this->getUri($event->getId(), max(EventParticipationTypeEnum::getPossibleTypes()) + 1));
 
-        $this->assertErrorResponse($client, 500);
+        $this->assertErrorResponse($client, 400);
     }
 
     /**

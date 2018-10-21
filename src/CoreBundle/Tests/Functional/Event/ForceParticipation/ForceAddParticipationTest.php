@@ -42,7 +42,7 @@ class ForceAddParticipationTest extends BaseForceParticipationTest
         $type   = max(EventParticipationTypeEnum::getPossibleTypes()) + 1;
         $client->request('POST', $this->getUri($event->getId(), $user->getId(), $type));
 
-        $this->assertErrorResponse($client, 500);
+        $this->assertErrorResponse($client, 400);
     }
 
     /**
@@ -96,7 +96,7 @@ class ForceAddParticipationTest extends BaseForceParticipationTest
      */
     public function existingParticipationProvider(): array
     {
-        $fixtures     = array(EventParticipationFixtures::class, UserOfficerFixtures::class);
+        $fixtures = array(EventParticipationFixtures::class, UserOfficerFixtures::class);
 
         return array_map(
             function(int $type) use($fixtures) { return array($fixtures, $type); },

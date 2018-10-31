@@ -10,7 +10,7 @@ Virtual Squirrels Api
 [![phpunit](https://img.shields.io/badge/phpunit-v7.0.0-magenta.svg)](https://phpunit.de/)
 
 
-This project is the api for the guild website of [Oh My Gosh Virtual Squirrels](http://virtualsquirrels.fr/).
+This project is a [Virtual Squirrels](http://virtualsquirrels.fr/) initiative.
 
 
 TO DO
@@ -64,15 +64,16 @@ cd VirtualSquirrelsApi
 composer install
 ````
 
-* Create your `app/config/parameters.yml` locally.
+* Create your `.env` file locally.
 
-Use `app/config/parameters.yml.dist` as base template.
+Use `.env.dist` as base template.
 
 * Database
 
 ````bash
 php bin/console doctrine:database:create
-php bin/console doctrine:schema:update --force-sql
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate
 ````
 
 * Start development server.
@@ -86,7 +87,7 @@ Testing
 -------
 
 ````bash
-vendor/bin/phpunit -c path/to/phpunit.xml src/
+vendor/bin/phpunit -c path/to/phpunit.xml tests/
 ````
 
 
